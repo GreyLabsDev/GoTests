@@ -16,8 +16,8 @@ func helloWorld(w http.ResponseWriter, r *http.Request) {
 
 func startPage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Hello, test application started.")
-	fmt.Fprintln(w, " - /helloworld - show title page")
-	fmt.Fprintln(w, " - /showinfo - show information about this thing")
+	fmt.Fprintln(w, "\n - /helloworld - show title page")
+	fmt.Fprintln(w, "\n - /showinfo - show information about this thing")
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
