@@ -2,14 +2,5 @@ runtime: go
 api_version: go1
 
 handlers:
-- url: /helloword
-  script: _go_app
-
-- url: /showinfo
-  script: _go_app
-
-- url: /exit
-  script: _go_app
-
 - url: /.*
   script: _go_app
