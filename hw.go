@@ -33,7 +33,7 @@ func init() {
 
 /*
 func main() {
-	fmt.Println("Hello, test server started on 80 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
+	fmt.Println("Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
