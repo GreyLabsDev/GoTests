@@ -5,4 +5,4 @@ api_version: go1
 
 handlers:
 - url: /.*
-  script: hw.go
+  script: _go_app
