@@ -1,5 +1,3 @@
-// +build !appengine
-
 package main
 
 import (
@@ -24,7 +22,8 @@ func init() {
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
-	http.ListenAndServe(":80", nil)
+	//Wrong code for App Enine - server cant understand what it need to show
+	//http.ListenAndServe(":80", nil)
 }
 
 /*
