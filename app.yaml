@@ -1,4 +1,4 @@
-application: testGoApp
+application: testgoapp
 version: 0
 runtime: go
 api_version: go1
