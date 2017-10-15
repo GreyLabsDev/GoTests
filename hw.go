@@ -15,7 +15,7 @@ func helloWorld(w http.ResponseWriter, r *http.Request) {
 }
 
 func startPage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
+	fmt.Fprint(w, "Hello, test application started.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
