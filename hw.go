@@ -15,11 +15,15 @@ func helloWorld(w http.ResponseWriter, r *http.Request) {
 }
 
 func startPage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello, test application started.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
+	fmt.Fprint(w, "Hello, test application started.")
+	fmt.Fprintln(w, " - /helloworld - show title page")
+	fmt.Fprintln(w, " - /showinfo - show information about this thing")
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Inforamtion page for test project.\nLanguage - Go\nPlatform - Google Application Engine")
+	fmt.Fprint(w, "Inforamtion page for test project.")
+	fmt.Fprintf(w, "Language - Go")
+	fmt.Fprintf(w, "Platform - Google Application Engine")
 }
 
 func init() {
