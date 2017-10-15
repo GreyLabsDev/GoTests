@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
+	"google.golang.org/appengine"
 )
 
 func helloWorld(w http.ResponseWriter, r *http.Request) {
@@ -23,6 +25,7 @@ func stopServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	appengine.Main()
 	fmt.Println("Hello, test server started on 80 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
