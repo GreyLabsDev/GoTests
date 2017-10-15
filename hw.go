@@ -7,11 +7,15 @@ import (
 )
 
 func helloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World")
+	fmt.Fprintf(w, "Hello World!")
 }
 
 func startPage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /exit - turn off this server")
+	fmt.Fprint(w, "Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
+}
+
+func showInfo(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Inforamtion page for test project.\nLanguage - Go\nPlatform - Google Application Engine")
 }
 
 func stopServer(w http.ResponseWriter, r *http.Request) {
@@ -19,9 +23,13 @@ func stopServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /exit - turn off this server")
+	fmt.Println("Hello, test server started on 80 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
+	http.HandleFunc("/showinfo", showInfo)
 	http.HandleFunc("/exit", stopServer)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":80", nil)
 }
+
+//goapp serve app.yaml
+//goapp deploy -application golangnode0 -version 0
