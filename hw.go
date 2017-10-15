@@ -1,3 +1,8 @@
+//Command to run test version:
+//goapp serve app.yaml
+//Command to deploy/update application:
+//goapp deploy -application golangnode0 -version 0
+
 package main
 
 import (
@@ -35,5 +40,3 @@ func main() {
 	http.ListenAndServe(":80", nil)
 }
 */
-//goapp serve app.yaml
-//goapp deploy -application golangnode0 -version 0
