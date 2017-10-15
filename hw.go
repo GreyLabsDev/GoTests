@@ -19,6 +19,15 @@ func showInfo(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Inforamtion page for test project.\nLanguage - Go\nPlatform - Google Application Engine")
 }
 
+func init() {
+
+	http.HandleFunc("/", startPage)
+	http.HandleFunc("/helloworld", helloWorld)
+	http.HandleFunc("/showinfo", showInfo)
+	http.ListenAndServe(":80", nil)
+}
+
+/*
 func main() {
 	fmt.Println("Hello, test server started on 80 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
 	http.HandleFunc("/", startPage)
@@ -26,6 +35,6 @@ func main() {
 	http.HandleFunc("/showinfo", showInfo)
 	http.ListenAndServe(":80", nil)
 }
-
+*/
 //goapp serve app.yaml
 //goapp deploy -application golangnode0 -version 0
