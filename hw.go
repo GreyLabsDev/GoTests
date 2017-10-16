@@ -21,7 +21,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Inforamtion page for test project.")
+	fmt.Fprintln(w, "Information page for test project.")
 	fmt.Fprintln(w, "Language - Go;")
 	fmt.Fprintln(w, "Platform - Google Application Engine;")
 }
