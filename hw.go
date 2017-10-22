@@ -26,7 +26,7 @@ type gmailUser struct {
 
 func sendMail(msg string) {
 	mailUser := gmailUser{
-		"GolangApplication@gmail.com",
+		"GolangApplication",
 		"glob456987dss@#",
 		"smtp.gmail.com",
 		"587"}
@@ -89,7 +89,5 @@ func init() {
 /*
 func main() {
 	fmt.Println("Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
-	init()
 	http.ListenAndServe(":8080", nil)
-}
-*/
+}*/
