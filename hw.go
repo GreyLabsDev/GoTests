@@ -36,31 +36,11 @@ func sendMail(msg string) {
 		"smtp.gmail.com:587",
 		auth,
 		mailUser.name,
-		[]string{"greyson.dean@gmail.com"},
+		[]string{"rec@mail.com"},
 		[]byte(msg),
 	)
 	if err != nil {
 		log.Fatal(err)
-	}
-}
-
-func send(body string) {
-	from := "golangapplication@gmail.com"
-	pass := "glob456987dss@#"
-	to := "greyson.dean@gmail.com"
-
-	msg := "From: " + from + "\n" +
-		"To: " + to + "\n" +
-		"Subject: Hello there\n\n" +
-		body
-
-	err := smtp.SendMail("smtp.gmail.com:587",
-		smtp.PlainAuth("", from, pass, "smtp.gmail.com"),
-		from, []string{to}, []byte(msg))
-
-	if err != nil {
-		log.Printf("smtp error: %s", err)
-		return
 	}
 }
 
@@ -75,8 +55,8 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		templatePage.Execute(w, &webPage{"simplePage"})
 	case "POST":
 		r.ParseForm()
-		send("Hello from test golang webapp!")
-		//fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
+		go sendMail("Hello from test golang webapp!")
+		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
 	}
 }
 
