@@ -24,7 +24,7 @@ type gmailUser struct {
 
 func sendMail(msg string) {
 	mailUser := gmailUser{
-		"GolangApplication@gmail.com",
+		"golangapplication@gmail.com",
 		"glob456987dss@#",
 	}
 	auth := smtp.PlainAuth("",
