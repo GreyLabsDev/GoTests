@@ -18,25 +18,22 @@ type webPage struct {
 }
 
 type gmailUser struct {
-	name       string
-	pswd       string
-	mailserver string
-	port       string
+	name string
+	pswd string
 }
 
 func sendMail(msg string) {
 	mailUser := gmailUser{
-		"GolangApplication",
+		"GolangApplication@gmail.com",
 		"glob456987dss@#",
-		"smtp.gmail.com",
-		"587"}
+	}
 	auth := smtp.PlainAuth("",
 		mailUser.name,
 		mailUser.pswd,
-		mailUser.mailserver,
+		"smtp.gmail.com",
 	)
 	err := smtp.SendMail(
-		mailUser.mailserver+":"+mailUser.port,
+		"smtp.gmail.com:587",
 		auth,
 		mailUser.name,
 		[]string{"greyson.dean@gmail.com"},
