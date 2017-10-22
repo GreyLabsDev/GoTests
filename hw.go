@@ -11,6 +11,10 @@ import (
 	"net/http"
 )
 
+type webPage struct {
+	Title string
+}
+
 func helloWorld(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World!")
 }
@@ -29,7 +33,7 @@ func showInfo(w http.ResponseWriter, r *http.Request) {
 
 func pageRender(w http.ResponseWriter, r *htt.Request) {
 	templatePage, _ := template.ParseFiles("index.html")
-	templatePage.Execute(w)
+	templatePage.Execute(w, &webPage{"simplePage"})
 }
 
 /*
