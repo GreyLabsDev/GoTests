@@ -27,7 +27,7 @@ func showInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func fileServer(w http.ResponseWriter, r *http.Request) {
-	http.FileServer(http.Dir("files"))
+	http.FileServer(http.Dir("/home/greyson_dean/files/"))
 }
 
 /*
