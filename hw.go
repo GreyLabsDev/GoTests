@@ -20,14 +20,14 @@ func helloWorld(w http.ResponseWriter, r *http.Request) {
 }
 
 func startPage(w http.ResponseWriter, r *http.Request) {
-	templatePage, _ := template.ParseFiles("start.html")
-	templatePage.Execute(w, &webPage{"simplePage"})
+	if r.Method == "GET" {
+		templatePage, _ := template.ParseFiles("start.html")
+		templatePage.Execute(w, &webPage{"simplePage"})
+	} else {
+		r.ParseForm()
+		fmt.Fprintf(w, "Hello World!")
+	}
 
-}
-
-func getFormInput(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
-	fmt.Fprintf(w, "Hello World!")
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
@@ -46,7 +46,6 @@ func init() {
 	//fs := http.FileServer(http.Dir("/home/greyson_dean/testGoApp/files"))
 
 	http.HandleFunc("/", startPage)
-	http.HandleFunc("/", getFormInput)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
 	//http.Handle("/files/", http.StripPrefix("/files", fs))
