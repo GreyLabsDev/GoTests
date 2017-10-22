@@ -99,8 +99,9 @@ func init() {
 }
 
 //this func not needed for deploy on Google App Engine, init() func replace main()
-/*
+
 func main() {
-	fmt.Println("Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
-	http.ListenAndServe(":8080", nil)
-}*/
+	//fmt.Println("Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
+	//http.ListenAndServe(":8080", nil)
+	go sender()
+}
