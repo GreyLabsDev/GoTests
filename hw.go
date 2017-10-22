@@ -26,8 +26,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		templatePage.Execute(w, &webPage{"simplePage"})
 	case "POST":
 		r.ParseForm()
-		action := r.Form.Get("action")
-		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! "+action)
+		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! "+r.Form)
 	}
 }
 
