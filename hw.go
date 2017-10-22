@@ -33,12 +33,12 @@ func sendEmail(w http.ResponseWriter, r *http.Redirect) {
 */
 
 func init() {
-	fs := http.FileServer(http.Dir("/home/greyson_dean/testGoApp/files"))
+	//fs := http.FileServer(http.Dir("/home/greyson_dean/testGoApp/files"))
 
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
-	http.Handle("/files/", http.StripPrefix("/files", fs))
+	//http.Handle("/files/", http.StripPrefix("/files", fs))
 	//Wrong code for App Enine - server cant understand what it need to show
 	//http.ListenAndServe(":80", nil)
 }
