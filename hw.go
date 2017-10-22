@@ -20,14 +20,14 @@ func helloWorld(w http.ResponseWriter, r *http.Request) {
 }
 
 func startPage(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
+	switch r.Method {
+	case "GET":
 		templatePage, _ := template.ParseFiles("start.html")
 		templatePage.Execute(w, &webPage{"simplePage"})
-	} else {
+	case "POST":
 		r.ParseForm()
 		fmt.Fprintf(w, "Hello World!")
 	}
-
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
