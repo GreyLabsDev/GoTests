@@ -58,7 +58,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		templatePage.Execute(w, &webPage{"simplePage"})
 	case "POST":
 		r.ParseForm()
-		sendMail("Hello from test golang webapp!")
+		go sendMail("Hello from test golang webapp!")
 		//fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
 	}
 }
