@@ -44,21 +44,6 @@ func sendMail(msg string) {
 	}
 }
 
-func sender() {
-	from := "golangapplication@gmail.com"
-	auth := smtp.PlainAuth("", from, "glob456987dss@#", "smtp.gmail.com")
-	err := smtp.SendMail(
-		"smtp.gmail.com:587", // server address
-		auth,                 // authentication
-		from,                 // sender's address
-		[]string{"greyson.dean@gmail.com"}, // recipients' address
-		[]byte("Hello World!"),             // message body
-	)
-	if err != nil {
-		log.Print(err)
-	}
-}
-
 func helloWorld(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World!")
 }
@@ -71,7 +56,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		r.ParseForm()
 		//go sendMail("Hello from test golang webapp!")
-		go sender()
+		//go sender()
 		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
 	}
 }
@@ -99,9 +84,9 @@ func init() {
 }
 
 //this func not needed for deploy on Google App Engine, init() func replace main()
-
+/*
 func main() {
 	//fmt.Println("Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
 	//http.ListenAndServe(":8080", nil)
 	go sender()
-}
+}*/
