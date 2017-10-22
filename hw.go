@@ -7,6 +7,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 )
 
@@ -24,6 +25,11 @@ func showInfo(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Information page for test project.")
 	fmt.Fprintln(w, "Language - Go;")
 	fmt.Fprintln(w, "Platform - Google Application Engine;")
+}
+
+func pageRender(w http.ResponseWriter, r *htt.Request) {
+	templatePage, _ := template.ParseFiles("index.html")
+	templatePage.Execute(w)
 }
 
 /*
