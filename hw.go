@@ -20,20 +20,14 @@ func helloWorld(w http.ResponseWriter, r *http.Request) {
 }
 
 func startPage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello, test application started.")
-	fmt.Fprintln(w, "\n - /helloworld - show title page")
-	fmt.Fprintln(w, "\n - /showinfo - show information about this thing")
+	templatePage, _ := template.ParseFiles("start.html")
+	templatePage.Execute(w, &webPage{"simplePage"})
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Information page for test project.")
 	fmt.Fprintln(w, "Language - Go;")
 	fmt.Fprintln(w, "Platform - Google Application Engine;")
-}
-
-func pageRender(w http.ResponseWriter, r *http.Request) {
-	templatePage, _ := template.ParseFiles("index.html")
-	templatePage.Execute(w, &webPage{"simplePage"})
 }
 
 /*
@@ -48,7 +42,6 @@ func init() {
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
-	http.HandleFunc("/webpage", pageRender)
 	//http.Handle("/files/", http.StripPrefix("/files", fs))
 	//Wrong code for App Enine - server cant understand what it need to show
 	//http.ListenAndServe(":80", nil)
