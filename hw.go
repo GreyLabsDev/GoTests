@@ -46,7 +46,6 @@ func init() {
 	//fs := http.FileServer(http.Dir("/home/greyson_dean/testGoApp/files"))
 
 	http.HandleFunc("/", startPage)
-	http.HandleFunc("/", getFormInput)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
 	//http.Handle("/files/", http.StripPrefix("/files", fs))
