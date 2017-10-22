@@ -35,12 +35,11 @@ func init() {
 	//http.ListenAndServe(":80", nil)
 }
 
+//this func not needed for deploy on Google App Engine, init() func replace main()
 /*
 func main() {
 	fmt.Println("Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
-	http.HandleFunc("/", startPage)
-	http.HandleFunc("/helloworld", helloWorld)
-	http.HandleFunc("/showinfo", showInfo)
+	init()
 	http.ListenAndServe(":8080", nil)
 }
 */
