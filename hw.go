@@ -26,7 +26,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		templatePage.Execute(w, &webPage{"simplePage"})
 	case "POST":
 		r.ParseForm()
-		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! "+r.FormValue("action"))
+		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
 	}
 }
 
@@ -46,6 +46,7 @@ func init() {
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
+	//http.HandleFunc("/save", showInfo)
 
 	//Wrong code for App Enine - server cant understand what it need to show
 	//http.ListenAndServe(":80", nil)
