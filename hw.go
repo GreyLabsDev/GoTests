@@ -8,11 +8,43 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
+	"net/smtp"
 )
 
 type webPage struct {
 	Title string
+}
+
+type gmailUser struct {
+	name       string
+	pswd       string
+	mailserver string
+	port       string
+}
+
+func sendMail(msg string) {
+	mailUser := gmailUser{
+		"GolangApplication@gmail.com",
+		"pswd",
+		"smtp.gmail.com",
+		"587"}
+	auth := smtp.PlainAuth("",
+		mailUser.name,
+		mailUser.pswd,
+		mailUser.mailserver,
+	)
+	err := smtp.SendMail(
+		mailUser.mailserver+":"+mailUser.port,
+		auth,
+		mailUser.name,
+		[]string{"greyson.dean@gmail.com"},
+		[]byte(msg),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func helloWorld(w http.ResponseWriter, r *http.Request) {
@@ -26,6 +58,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		templatePage.Execute(w, &webPage{"simplePage"})
 	case "POST":
 		r.ParseForm()
+		sendMail("Hello from test golang webapp!")
 		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
 	}
 }
