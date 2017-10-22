@@ -33,7 +33,7 @@ func sendEmail(w http.ResponseWriter, r *http.Redirect) {
 */
 
 func init() {
-	fs := http.FileServer(http.Dir("/home/greyson_dean/files/"))
+	fs := http.FileServer(http.Dir("/home/greyson_dean/testGoApp/files"))
 
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
