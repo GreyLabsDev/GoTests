@@ -27,7 +27,7 @@ type gmailUser struct {
 func sendMail(msg string) {
 	mailUser := gmailUser{
 		"GolangApplication@gmail.com",
-		"pswd",
+		"glob456987dss@#",
 		"smtp.gmail.com",
 		"587"}
 	auth := smtp.PlainAuth("",
@@ -59,7 +59,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		r.ParseForm()
 		sendMail("Hello from test golang webapp!")
-		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
+		//fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
 	}
 }
 
