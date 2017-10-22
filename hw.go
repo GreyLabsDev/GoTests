@@ -31,7 +31,7 @@ func showInfo(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Platform - Google Application Engine;")
 }
 
-func pageRender(w http.ResponseWriter, r *htt.Request) {
+func pageRender(w http.ResponseWriter, r *http.Request) {
 	templatePage, _ := template.ParseFiles("index.html")
 	templatePage.Execute(w, &webPage{"simplePage"})
 }
