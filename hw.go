@@ -25,7 +25,7 @@ type gmailUser struct {
 func sendMail(msg string) {
 	mailUser := gmailUser{
 		"golangapplication@gmail.com",
-		"glob456987dss@#",
+		"",
 	}
 	auth := smtp.PlainAuth("",
 		mailUser.name,
@@ -44,6 +44,26 @@ func sendMail(msg string) {
 	}
 }
 
+func send(body string) {
+	from := "golangapplication@gmail.com"
+	pass := "glob456987dss@#"
+	to := "greyson.dean@gmail.com"
+
+	msg := "From: " + from + "\n" +
+		"To: " + to + "\n" +
+		"Subject: Hello there\n\n" +
+		body
+
+	err := smtp.SendMail("smtp.gmail.com:587",
+		smtp.PlainAuth("", from, pass, "smtp.gmail.com"),
+		from, []string{to}, []byte(msg))
+
+	if err != nil {
+		log.Printf("smtp error: %s", err)
+		return
+	}
+}
+
 func helloWorld(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World!")
 }
@@ -55,7 +75,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		templatePage.Execute(w, &webPage{"simplePage"})
 	case "POST":
 		r.ParseForm()
-		sendMail("Hello from test golang webapp!")
+		send("Hello from test golang webapp!")
 		//fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
 	}
 }
