@@ -87,7 +87,6 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		fmt.Fprintf(w, "Get status - "+statusContent)
 	case "POST":
-		r.ParseForm()
 		fmt.Fprintf(w, "Get data by params in POST - OK")
 		statusContent = "POST request handled"
 	}
