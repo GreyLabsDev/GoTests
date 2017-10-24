@@ -12,3 +12,6 @@ handlers:
 
 - url: /showinfo
   script: _go_app
+
+- url: /status
+  script: _go_app

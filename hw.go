@@ -8,12 +8,16 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/smtp"
 )
+
+var statusContent string = "Default status"
 
 type webPage struct {
 	Title string
@@ -46,6 +50,24 @@ func sendMail(msg string) {
 	}
 }
 
+func echo(ID string) {
+	url := "http://goappnode" + ID + ".appspot.com" + "/status"
+
+	var jsonStr = []byte(`{"message":"Web echo"}`)
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	statusContent = string(body)
+
+}
+
 func helloWorld(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World!")
 }
@@ -59,7 +81,19 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		//go sendMail("Hello from test golang webapp!")
 		//go sender()
+		echo(1)
 		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
+	}
+}
+
+func statusServer(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		fmt.Fprintf(w, "Get status - "+statusContent)
+	case "POST":
+		r.ParseForm()
+		fmt.Fprintf(w, "Get data by params in POST - OK")
+		statusContent = "POST request - Responded"
 	}
 }
 
@@ -69,17 +103,11 @@ func showInfo(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Platform - Google Application Engine;")
 }
 
-/*
-func sendEmail(w http.ResponseWriter, r *http.Redirect) {
-
-}
-*/
-
 func init() {
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
-	//http.HandleFunc("/save", showInfo)
+	http.HandleFunc("/status", statusServer)
 
 	//Wrong code for App Enine - server cant understand what it need to show
 	//http.ListenAndServe(":80", nil)
