@@ -50,7 +50,8 @@ func sendMail(msg string) {
 	}
 }
 
-func echo(ID int) {
+func echo() {
+	ID := 1
 	url := "http://goappnode" + string(ID) + ".appspot.com" + "/status"
 
 	client := &http.Client{}
@@ -81,7 +82,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		//go sendMail("Hello from test golang webapp!")
 		//go sender()
-		go echo(1)
+		go echo()
 		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
 	}
 }
