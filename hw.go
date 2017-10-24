@@ -57,6 +57,12 @@ func echo() {
 	jsonStr := []byte(`{"message":"Web echo"}`)
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
 
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
 	statusContent = "Request sent"
 
 }
