@@ -51,7 +51,7 @@ func sendMail(msg string) {
 }
 
 func echo(ID int) {
-	url := "http://goappnode" + ID + ".appspot.com" + "/status"
+	url := "http://goappnode" + string(ID) + ".appspot.com" + "/status"
 
 	var jsonStr = []byte(`{"message":"Web echo"}`)
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
