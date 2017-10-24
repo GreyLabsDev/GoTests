@@ -50,7 +50,7 @@ func sendMail(msg string) {
 	}
 }
 
-func echo(ID string) {
+func echo(ID int) {
 	url := "http://goappnode" + ID + ".appspot.com" + "/status"
 
 	var jsonStr = []byte(`{"message":"Web echo"}`)
