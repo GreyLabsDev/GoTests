@@ -53,10 +53,10 @@ func sendMail(msg string) {
 func echo(ID int) {
 	url := "http://goappnode" + string(ID) + ".appspot.com" + "/status"
 
-	var jsonStr = []byte(`{"message":"Web echo"}`)
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
-
 	client := &http.Client{}
+	jsonStr := []byte(`{"message":"Web echo"}`)
+	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+
 	resp, err := client.Do(req)
 	if err != nil {
 		panic(err)
