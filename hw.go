@@ -11,7 +11,6 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/smtp"
@@ -58,14 +57,7 @@ func echo() {
 	jsonStr := []byte(`{"message":"Web echo"}`)
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
 
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-
-	body, _ := ioutil.ReadAll(resp.Body)
-	statusContent = string(body)
+	statusContent = "Request sent"
 
 }
 
