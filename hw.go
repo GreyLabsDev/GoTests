@@ -2,6 +2,8 @@
 //goapp serve app.yaml
 //Command to deploy/update application:
 //goapp deploy -application golangnode0 -version 0
+//Command to test application without deploy
+//goapp serve app.yaml
 
 package main
 
