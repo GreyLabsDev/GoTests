@@ -11,6 +11,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/smtp"
@@ -51,16 +52,21 @@ func sendMail(msg string) {
 
 func echo() {
 
-	url := "http://goappnode1.appspot.com/status"
+	url := "http://golangappnode1.appspot.com"
 
-	jsonStr := []byte(`{"message":"Web echo"}`)
-	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+	var jsonStr = []byte(`{"msg":"Hello!"}`)
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
 
 	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
 
-	client.Do(req)
+	defer resp.Body.Close()
 
-	statusContent = "Request sent "
+	body, _ := ioutil.ReadAll(resp.Body)
+	statusContent = string(body)
 
 }
 
