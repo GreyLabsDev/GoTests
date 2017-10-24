@@ -50,20 +50,17 @@ func sendMail(msg string) {
 }
 
 func echo() {
-	ID := 1
-	url := "http://goappnode" + string(ID) + ".appspot.com" + "/status"
 
-	client := &http.Client{}
+	url := "http://goappnode1.appspot.com/status"
+
 	jsonStr := []byte(`{"message":"Web echo"}`)
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
 
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
+	client := &http.Client{}
 
-	statusContent = "Request sent"
+	client.Do(req)
+
+	statusContent = "Request sent "
 
 }
 
@@ -92,7 +89,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		r.ParseForm()
 		fmt.Fprintf(w, "Get data by params in POST - OK")
-		statusContent = "POST request - Responded"
+		statusContent = "POST request handled"
 	}
 }
 
