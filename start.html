@@ -6,18 +6,18 @@
     
     <script>
         function openNavigation() {
-            document.getElementById("mainPanel").style.marginLeft = "15%";
+            document.getElementById("main").style.marginLeft = "15%";
             document.getElementById("navigationBar").style.width = "15%";
             document.getElementById("navigationBar").style.display = "block";
             }
         function closeNavigation() {
-            document.getElementById("mainPanel").style.marginLeft = "0%";
+            document.getElementById("main").style.marginLeft = "0%";
             document.getElementById("navigationBar").style.display = "none";
             document.getElementById("openNav").style.display = "inline-block";
             }
     </script>
     
-<body>
+<body class="w3-black">
     <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-black" style="display:none" id="navigationBar">
         <button class="w3-bar-item w3-button w3-red" onclick="closeNavigation()">Close &times;</button>
         <a href="http://golangappnode0.appspot.com/helloworld" class="w3-bar-item w3-button">Hello world</a>
@@ -25,7 +25,7 @@
         <a class="w3-bar-item w3-button">Start action</a>
     </div>
     
-    <div id="mainPanel">
+    <div id="main">
         <div class="w3-indigo">
             <div class="w3-container">
             <h1>Golang test node</h1>
