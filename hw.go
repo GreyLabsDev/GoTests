@@ -15,6 +15,9 @@ import (
 	"log"
 	"net/http"
 	"net/smtp"
+
+	"appengine"
+	"appengine/urlfetch"
 )
 
 var statusContent string = "Default status"
@@ -50,6 +53,7 @@ func sendMail(msg string) {
 	}
 }
 
+//wrong func for Google App Engine deployment. Need to use appengine libs...=(
 func echo() {
 
 	url := "http://golangappnode1.appspot.com"
@@ -95,6 +99,16 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		fmt.Fprintf(w, "Get data by params in POST - OK")
 		statusContent = "POST request handled"
+	}
+}
+
+func testEcho(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	bs := []byte{1, 2, 3}
+	buf := bytes.NewBuffer(bs)
+	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
+	if _, err := client.Post("http://localhost:8080/", "application/octet-stream", buf); err != nil {
+		fmt.Println(err)
 	}
 }
 
