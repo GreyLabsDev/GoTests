@@ -56,7 +56,7 @@ func sendMail(msg string) {
 //wrong func for Google App Engine deployment. Need to use appengine libs...=(
 func echo() {
 
-	url := "http://golangappnode1.appspot.com"
+	url := "http://golangappnode1.appspot.com/status"
 
 	var jsonStr = []byte(`{"msg":"Hello!"}`)
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
@@ -107,7 +107,8 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	bs := []byte{1, 2, 3}
 	buf := bytes.NewBuffer(bs)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
-	if _, err := client.Post("http://localhost:8080/", "application/octet-stream", buf); err != nil {
+	if _, err := client.Post("http://golangappnode1.appspot.com/status", "application/octet-stream", buf); err != nil {
+		statusContent = err
 		fmt.Println(err)
 	}
 }
@@ -123,6 +124,7 @@ func init() {
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
 	http.HandleFunc("/status", statusServer)
+	http.HandleFunc("/echo", testEcho)
 
 	//Wrong code for App Enine - server cant understand what it need to show
 	//http.ListenAndServe(":80", nil)
