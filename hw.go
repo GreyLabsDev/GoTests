@@ -108,7 +108,7 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	buf := bytes.NewBuffer(bs)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
 	if _, err := client.Post("http://golangappnode1.appspot.com/status", "application/octet-stream", buf); err != nil {
-		statusContent = err
+		statusContent = string(err)
 		fmt.Println(err)
 	}
 }
