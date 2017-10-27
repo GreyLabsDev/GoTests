@@ -4,7 +4,32 @@
     <meta name="theme-color" content="#3F51B5">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
-    
+    <style> 
+        input[type=text] {
+            width: 50%;
+            padding: 10px 10px;
+            box-sizing: border-box;
+            border: 3px solid #3F51B5;
+            outline: none;
+            color: white;
+            background-color: black;
+            -webkit-transition: 0.4s;
+        }
+
+        input[type=text]:focus {
+            background-color: #3F51B5;
+            border: 3px solid #3F51B5;
+        }
+        input[type=button], input[type=submit], input[type=reset] {
+            background-color: #3F51B5;
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
     <script>
         function openNavigation() {
             document.getElementById("main").style.marginLeft = "15%";
@@ -25,7 +50,6 @@
         <a href="http://goappnode0.appspot.com/showinfo" class="w3-bar-item w3-button">App Info</a>
         <a href="http://goappnode0.appspot.com/status" class="w3-bar-item w3-button">Status</a>
     </div>
-    
     <div id="main">
         <div class="w3-indigo">
             <div class="w3-container">
@@ -38,14 +62,18 @@
             <p>- /helloworld - show title page</p>
             <p>- /showinfo - show information about this thing</p>
             <p>Or you can use left navigation bar to go to this pages</p>
-            <form action="" method="post"><input type="submit" value="Echo"></form>
+                <p>Send test POST request to cluster member</p>
+            <form>
+                <p><label for="nodeId">Node ID:</label></p>
+                <p><input type="text" id="nodeIdIn" name="nodeId" value=""></p>
+                <p><label for="echoContent">Request content:</label></p>
+                <p><input type="text" id="echoContentIn" name="echoContent" value=""></p>
+                <p><input class="w3-button w3-indigo" type="submit" id="sendEchoBtn" name="echoBtn" value="Send Echo"><input class="w3-button w3-indigo" type="reset" id="resetEchoBtn" name="echoBtn" value="Reset Echo settings"></p>    
+            </form>
             <p>Google Application Engine + Golang + HTML5 (w3.css)</p>
             <p>GreyLabs</p>
             <a href="https://github.com/GreyLabsDev/GoTests" class="w3-button w3-indigo" >Source on GitHub</a>
         </div>
-        
     </div>
-    
-    
 </body>
 </html>
