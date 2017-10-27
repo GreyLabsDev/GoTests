@@ -86,7 +86,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		//go sendMail("Hello from test golang webapp!")
 		//go sender()
 		go echo()
-		fmt.Fprintf(w, "Successful read command/input from web-interface! Yeah! ")
+		fmt.Fprintf(w, "Successful read command/input from web-interface! Input contains - " + r.FormValue("nodeId") + " " + r.FormValue("echoContent"))
 	}
 }
 
