@@ -127,7 +127,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 			"empty",
 		}
 
-		jsonNodeStats, err := json.Marshal(thisNodeStats)
+		jsonNodeStats, err1 := json.Marshal(thisNodeStats)
 		if err1 != nil {
 			panic(err1)
 		}
