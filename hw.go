@@ -26,12 +26,12 @@ type webPage struct {
 }
 
 type nodeStats struct {
-	nodeID           int    `json:"ID"`
-	hasTask          bool   `json:"hasTask"`
-	taskStatus       string `json:"taskStatus"`
-	taskResult       string `json:"taskResult"`
-	taskFragmentBody string `json:"taskFragmentBody"`
-	taskBody         string `json:"taskBody"`
+	NodeID           int    `json:"ID"`
+	HasTask          bool   `json:"hasTask"`
+	TaskStatus       string `json:"taskStatus"`
+	TaskResult       string `json:"taskResult"`
+	TaskFragmentBody string `json:"taskFragmentBody"`
+	TaskBody         string `json:"taskBody"`
 }
 
 type gmailUser struct {
