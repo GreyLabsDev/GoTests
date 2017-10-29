@@ -100,9 +100,13 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		fmt.Fprintf(w, "Get status - "+statusContent)
 	case "POST":
-		r.ParseForm()
+		nodeSends := node{}
+		err := json.Decoder(r.Body).Decode(&nodeSends)
+		if err != nil {
+			panic(err)
+		}
 		fmt.Fprintf(w, "Get data by params in POST - OK")
-		statusContent = "POST request handled, " + "Node id: " + strings.Join(r.Form["nodeId"], " ") + ", Echo content: " + strings.Join(r.Form["echoContent"], " ")
+		statusContent = "POST request handled, " + "Node id: " + string(nodeSends.id) + ", Echo content: " + nodeSends.content)
 	}
 }
 
@@ -130,7 +134,7 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	}
 	respBody, _ := ioutil.ReadAll(resp.Body)
 	statusContent = "Response from node - " + string(respBody)
-	w.Write(jsonNodeOne)
+	//w.Write(jsonNodeOne)
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
