@@ -84,8 +84,6 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		templatePage.Execute(w, &webPage{"simplePage"})
 	case "POST":
 		r.ParseForm()
-		//go sendMail("Hello from test golang webapp!")
-		//go sender()
 		//go echo()
 		fmt.Fprintf(w, "Successful read command/input from web-interface! Input contains - "+r.FormValue("nodeId")+" "+r.FormValue("echoContent"))
 	}
@@ -96,14 +94,16 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		fmt.Fprintf(w, "Get status - "+statusContent)
 	case "POST":
+		r.ParseForm()
 		fmt.Fprintf(w, "Get data by params in POST - OK")
 		statusContent = "POST request handled, " + "Node id: " + strings.Join(r.Form["nodeId"], " ") + ", Echo content: " + strings.Join(r.Form["echoContent"], " ")
 	}
 }
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
 	c := appengine.NewContext(r)
-	bs := []byte{1, 2, 3}
+	bs := []byte{strings.Join(r.Form["nodeId"], strings.Join(r.Form["echoContent"]}
 	buf := bytes.NewBuffer(bs)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
 	resp, err := client.Post("http://goappnode1.appspot.com/status", "application/octet-stream", buf)
@@ -113,6 +113,7 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	}
 	respBody, _ := ioutil.ReadAll(resp.Body)
 	statusContent = "Response from node - " + string(respBody)
+	fmt.Fprintf(w, "Node id: " + strings.Join(r.Form["nodeId"], " ") + ", Echo content: " + strings.Join(r.Form["echoContent"])
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
