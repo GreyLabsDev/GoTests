@@ -130,6 +130,7 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	}
 	respBody, _ := ioutil.ReadAll(resp.Body)
 	statusContent = "Response from node - " + string(respBody)
+	fmt.Fprintf(w, jsonNodeOne)
 
 }
 
