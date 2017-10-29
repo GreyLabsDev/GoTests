@@ -7,6 +7,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -23,6 +24,11 @@ var statusContent string = "Default status"
 
 type webPage struct {
 	Title string
+}
+
+type node struct {
+	id      int
+	content string
 }
 
 type gmailUser struct {
@@ -101,9 +107,17 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
+
+	nodeOne := node{
+		1,
+		"Hello",
+	}
+	jsonNodeOne := json.Marshal(nodeOne)
+
 	c := appengine.NewContext(r)
-	bs := []byte{1, 2, 3}
-	buf := bytes.NewBuffer(bs)
+	var jsonStr = []byte(jsonNodeOne)
+	//bs := []byte{1, 2, 3}
+	buf := bytes.NewBuffer(jsonStr)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
 	resp, err := client.Post("http://goappnode1.appspot.com/status", "application/octet-stream", buf)
 	if err != nil {
@@ -112,6 +126,7 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	}
 	respBody, _ := ioutil.ReadAll(resp.Body)
 	statusContent = "Response from node - " + string(respBody)
+
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
