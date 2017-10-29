@@ -98,7 +98,6 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		fmt.Fprintf(w, "Get status - "+statusContent)
 	case "POST":
-
 		buf := new(bytes.Buffer)
 		buf.ReadFrom(r.Body)
 		newStr := buf.String()
@@ -130,7 +129,7 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
 	c := appengine.NewContext(r)
-	var jsonStr = []byte(`{"` + r.FormValue("nodeId") + `":"` + r.FormValue("echoContent") + `"}`)
+	var jsonStr = []byte(`{"` + r.FormValue("nodeId") + `":"` + r.FormValue("echoContent") + `", "lol":"lol"}`)
 	//bs := []byte{1, 2, 3}
 	buf := bytes.NewBuffer(jsonStr)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
