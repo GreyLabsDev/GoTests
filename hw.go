@@ -34,6 +34,11 @@ type nodeStats struct {
 	TaskBody         string `json:"taskBody"`
 }
 
+type echoMessage struct {
+	Title   string `json:"title"`
+	Content string `json:"content"`
+}
+
 type gmailUser struct {
 	name string
 	pswd string
@@ -94,7 +99,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		r.ParseForm()
 		//go echo()
-		fmt.Fprintf(w, "Successful read command/input from web-interface! Input contains - "+r.FormValue("nodeId")+" "+r.FormValue("echoContent"))
+		//fmt.Fprintf(w, "Successful read command/input from web-interface! Input contains - "+r.FormValue("nodeId")+" "+r.FormValue("echoContent"))
 	}
 }
 
@@ -116,8 +121,8 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 			"empty",
 		}
 
-		jsonNodeStats, err1 := json.Marshal(thisNodeStats)
-		if err1 != nil {
+		jsonNodeStats, err := json.Marshal(thisNodeStats)
+		if err != nil {
 			panic(err1)
 		}
 
@@ -128,11 +133,22 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
+	msg := echoMessage{
+		"Message is",
+		"",
+	}
 
+	r.ParseForm()
 	c := appengine.NewContext(r)
-	var jsonStr = []byte(`{"Message from another node":"` + r.FormValue("echoContent") + `"}`)
-	//bs := []byte{1, 2, 3}
+	msg.Content = r.FormValue("echoContent")
+
+	jsonMessage, err2 := json.Marshal(msg)
+	if err2 != nil {
+		panic(err2)
+	}
+
+	//jsonStr := []byte(`{"message":"` + r.FormValue("echoContent") + `"}`)
+	jsonStr := []byte(jsonMessage)
 	buf := bytes.NewBuffer(jsonStr)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
 	resp, err := client.Post("http://goappnode"+r.FormValue("nodeId")+".appspot.com/status", "application/octet-stream", buf)
