@@ -107,7 +107,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		buf.ReadFrom(r.Body)
 		newStr := buf.String()
 
-		thisNodeStats := &nodeStats{
+		thisNodeStats := nodeStats{
 			1,
 			false,
 			"not running",
@@ -121,7 +121,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 			panic(err1)
 		}
 
-		fmt.Fprintf(w, "Get data by params in POST - OK"+string(jsonNodeStats))
+		fmt.Fprintf(w, "Get data by params in POST - OK"+string(jsonNodeStats)+thisNodeStats.taskStatus)
 		//statusContent = "POST request handled, " + "Node id: " + string(nodeSends.id) + ", Echo content: " + nodeSends.content
 		statusContent = "POST request handled, " + newStr
 	}
