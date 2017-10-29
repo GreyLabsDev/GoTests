@@ -7,7 +7,6 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -119,7 +118,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
 
-	nodeOne := node{
+	/*nodeOne := node{
 		1,
 		"Hello",
 	}
@@ -127,10 +126,10 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	jsonNodeOne, err1 := json.Marshal(nodeOne)
 	if err1 != nil {
 		panic(err1)
-	}
+	}*/
 
 	c := appengine.NewContext(r)
-	var jsonStr = []byte(jsonNodeOne)
+	var jsonStr = []byte(`{"msg":"Hello!"}`)
 	//bs := []byte{1, 2, 3}
 	buf := bytes.NewBuffer(jsonStr)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
@@ -141,7 +140,6 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	}
 	respBody, _ := ioutil.ReadAll(resp.Body)
 	statusContent = "Response from node - " + string(respBody)
-	//w.Write(jsonNodeOne)
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
