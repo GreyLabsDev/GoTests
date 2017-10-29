@@ -107,7 +107,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		buf.ReadFrom(r.Body)
 		newStr := buf.String()
 
-		thisNodeStats := nodeStats{
+		thisNodeStats := &nodeStats{
 			1,
 			false,
 			"not running",
