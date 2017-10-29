@@ -112,7 +112,10 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		buf.ReadFrom(r.Body)
 		newStr := buf.String()
 
-		inputMsg := echoMessage{}
+		inputMsg := echoMessage{
+			"",
+			"",
+		}
 		err2 := json.NewDecoder(r.Body).Decode(&inputMsg)
 		if err2 != nil {
 			panic(err2)
