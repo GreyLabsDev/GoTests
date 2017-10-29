@@ -127,9 +127,10 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	if err1 != nil {
 		panic(err1)
 	}*/
+	r.ParseForm()
 
 	c := appengine.NewContext(r)
-	var jsonStr = []byte(`{"msg":"Hello!"}`)
+	var jsonStr = []byte(`{"` + r.FormValue("nodeId") + `":"` + r.FormValue("echoContent") + `"}`)
 	//bs := []byte{1, 2, 3}
 	buf := bytes.NewBuffer(jsonStr)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
