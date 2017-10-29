@@ -26,12 +26,12 @@ type webPage struct {
 }
 
 type nodeStats struct {
-	nodeID           int
-	hasTask          bool
-	taskStatus       string
-	taskResult       string
-	taskFragmentBody string
-	taskBody         string
+	nodeID           int    `json:"ID"`
+	hasTask          bool   `json:"hasTask"`
+	taskStatus       string `json:"taskStatus"`
+	taskResult       string `json:"taskResult"`
+	taskFragmentBody string `json:"taskFragmentBody"`
+	taskBody         string `json:"taskBody"`
 }
 
 type gmailUser struct {
@@ -121,7 +121,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 			panic(err1)
 		}
 
-		fmt.Fprintf(w, "Get data by params in POST - OK"+string(jsonNodeStats)+thisNodeStats.taskStatus)
+		fmt.Fprintf(w, "Get data by params in POST - OK "+string(jsonNodeStats))
 		//statusContent = "POST request handled, " + "Node id: " + string(nodeSends.id) + ", Echo content: " + nodeSends.content
 		statusContent = "POST request handled, " + newStr
 	}
