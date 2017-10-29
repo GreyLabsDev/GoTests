@@ -101,7 +101,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		nodeSends := node{}
 		buf := new(bytes.Buffer)
-		buf.ReadFrom(response.Body)
+		buf.ReadFrom(r.Body)
 		newStr := buf.String()
 		/*err := json.Decoder(newStr).Decode(&nodeSends)
 		if err != nil {
