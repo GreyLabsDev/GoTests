@@ -100,7 +100,10 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Get status - "+statusContent)
 	case "POST":
 		nodeSends := node{}
-		err := json.Decoder(r.Body).Decode(&nodeSends)
+		buf := new(bytes.Buffer)
+		buf.ReadFrom(response.Body)
+		newStr := buf.String()
+		err := json.Decoder(newStr).Decode(&nodeSends)
 		if err != nil {
 			panic(err)
 		}
