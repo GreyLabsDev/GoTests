@@ -86,7 +86,7 @@ func startPage(w http.ResponseWriter, r *http.Request) {
 		//go sendMail("Hello from test golang webapp!")
 		//go sender()
 		//go echo()
-		fmt.Fprintf(w, "Successful read command/input from web-interface! Input contains - " + r.FormValue("nodeId") + " " + r.FormValue("echoContent"))
+		fmt.Fprintf(w, "Successful read command/input from web-interface! Input contains - "+r.FormValue("nodeId")+" "+r.FormValue("echoContent"))
 	}
 }
 
@@ -96,7 +96,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Get status - "+statusContent)
 	case "POST":
 		fmt.Fprintf(w, "Get data by params in POST - OK")
-		statusContent = "POST request handled"
+		statusContent = "POST request handled, " + "Node id: " + r.Form["nodeId"] + ", Echo content: " + r.Form["echoContent"]
 	}
 }
 
@@ -105,10 +105,13 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	bs := []byte{1, 2, 3}
 	buf := bytes.NewBuffer(bs)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
-	if _, err := client.Post("http://goappnode1.appspot.com/status", "application/octet-stream", buf); err != nil {
+	resp, err := client.Post("http://goappnode1.appspot.com/status", "application/octet-stream", buf)
+	if err != nil {
 		statusContent = err.Error()
 		fmt.Println(err)
 	}
+	respBody, _ := ioutil.ReadAll(resp.Body)
+	statusContent = string(respBody)
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
