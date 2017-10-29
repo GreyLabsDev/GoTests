@@ -121,15 +121,9 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 			"empty",
 		}
 
-<<<<<<< HEAD
 		jsonNodeStats, err1 := json.Marshal(thisNodeStats)
 		if err1 != nil {
 			panic(err1)
-=======
-		jsonNodeStats, err := json.Marshal(thisNodeStats)
-		if err != nil {
-			panic(err)
->>>>>>> parent of b0ffb84... json to object tests
 		}
 
 		fmt.Fprintf(w, "Get data by params in POST - OK "+string(jsonNodeStats))
