@@ -13,7 +13,6 @@ import (
 	"log"
 	"net/http"
 	"net/smtp"
-	"strings"
 
 	"appengine"
 	"appengine/urlfetch"
@@ -97,7 +96,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Get status - "+statusContent)
 	case "POST":
 		fmt.Fprintf(w, "Get data by params in POST - OK")
-		statusContent = "POST request handled, " + "Node id: " + strings.Join(r.Form["nodeId"], " ") + ", Echo content: " + strings.Join(r.Form["echoContent"], " ")
+		//statusContent = "POST request handled, " + "Node id: " + strings.Join(r.Form["nodeId"], " ") + ", Echo content: " + strings.Join(r.Form["echoContent"], " ")
 	}
 }
 
@@ -112,7 +111,7 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 	respBody, _ := ioutil.ReadAll(resp.Body)
-	statusContent = string(respBody)
+	statusContent = "Response from node - " + string(respBody)
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
