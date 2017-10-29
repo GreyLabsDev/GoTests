@@ -96,7 +96,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Get status - "+statusContent)
 	case "POST":
 		fmt.Fprintf(w, "Get data by params in POST - OK")
-		statusContent = "POST request handled, " + "Node id: " + r.Form["nodeId"] + ", Echo content: " + r.Form["echoContent"]
+		statusContent = "POST request handled, " + "Node id: " + string(r.Form["nodeId"]) + ", Echo content: " + string(r.Form["echoContent"])
 	}
 }
 
