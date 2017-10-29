@@ -112,7 +112,11 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 		1,
 		"Hello",
 	}
-	jsonNodeOne := json.Marshal(nodeOne)
+
+	jsonNodeOne, err1 := json.Marshal(nodeOne)
+	if err1 != nil {
+		panic(err1)
+	}
 
 	c := appengine.NewContext(r)
 	var jsonStr = []byte(jsonNodeOne)
