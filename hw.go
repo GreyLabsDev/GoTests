@@ -99,14 +99,18 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		fmt.Fprintf(w, "Get status - "+statusContent)
 	case "POST":
-		nodeSends := node{}
+
 		buf := new(bytes.Buffer)
 		buf.ReadFrom(r.Body)
 		newStr := buf.String()
-		/*err := json.Decoder(newStr).Decode(&nodeSends)
-		if err != nil {
-			panic(err)
-		}*/
+
+		/*
+			nodeSends := node{}
+			err := json.Decoder(newStr).Decode(&nodeSends)
+			if err != nil {
+				panic(err)
+			}
+		*/
 		fmt.Fprintf(w, "Get data by params in POST - OK")
 		//statusContent = "POST request handled, " + "Node id: " + string(nodeSends.id) + ", Echo content: " + nodeSends.content
 		statusContent = "POST request handled, " + newStr
