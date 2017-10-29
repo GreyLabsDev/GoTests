@@ -123,7 +123,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 
 		jsonNodeStats, err := json.Marshal(thisNodeStats)
 		if err != nil {
-			panic(err1)
+			panic(err)
 		}
 
 		fmt.Fprintf(w, "Get data by params in POST - OK "+string(jsonNodeStats))
