@@ -113,7 +113,6 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	}
 	respBody, _ := ioutil.ReadAll(resp.Body)
 	statusContent = "Response from node - " + string(respBody)
-	fmt.Fprintf(w, "Node id: " + strings.Join(r.Form["nodeId"], " ") + ", Echo content: " + strings.Join(r.Form["echoContent"])
 }
 
 func showInfo(w http.ResponseWriter, r *http.Request) {
