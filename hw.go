@@ -129,11 +129,11 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
 	c := appengine.NewContext(r)
-	var jsonStr = []byte(`{"` + r.FormValue("nodeId") + `":"` + r.FormValue("echoContent") + `", "lol":"lol"}`)
+	var jsonStr = []byte(`{"Message from another node":"` + r.FormValue("echoContent") + `"}`)
 	//bs := []byte{1, 2, 3}
 	buf := bytes.NewBuffer(jsonStr)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
-	resp, err := client.Post("http://goappnode1.appspot.com/status", "application/octet-stream", buf)
+	resp, err := client.Post("http://goappnode"+r.FormValue("nodeId")+".appspot.com/status", "application/octet-stream", buf)
 	if err != nil {
 		statusContent = err.Error()
 		fmt.Println(err)
