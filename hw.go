@@ -103,9 +103,8 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
 	c := appengine.NewContext(r)
-	bs := []byte{strings.Join(r.Form["nodeId"], strings.Join(r.Form["echoContent"]}
+	bs := []byte{1, 2, 3}
 	buf := bytes.NewBuffer(bs)
 	client := http.Client{Transport: &urlfetch.Transport{Context: c}}
 	resp, err := client.Post("http://goappnode1.appspot.com/status", "application/octet-stream", buf)
