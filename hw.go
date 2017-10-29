@@ -14,7 +14,6 @@ import (
 	"log"
 	"net/http"
 	"net/smtp"
-	"strings"
 
 	"appengine"
 	"appengine/urlfetch"
@@ -106,7 +105,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 		fmt.Fprintf(w, "Get data by params in POST - OK")
-		statusContent = "POST request handled, " + "Node id: " + string(nodeSends.id) + ", Echo content: " + nodeSends.content)
+		statusContent = "POST request handled, " + "Node id: " + string(nodeSends.id) + ", Echo content: " + nodeSends.content
 	}
 }
 
