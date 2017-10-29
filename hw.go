@@ -7,6 +7,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -24,9 +25,13 @@ type webPage struct {
 	Title string
 }
 
-type node struct {
-	id      int
-	content string
+type nodeStats struct {
+	nodeID           int
+	hasTask          bool
+	taskStatus       string
+	taskResult       string
+	taskFragmentBody string
+	taskBody         string
 }
 
 type gmailUser struct {
@@ -102,30 +107,27 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		buf.ReadFrom(r.Body)
 		newStr := buf.String()
 
-		/*
-			nodeSends := node{}
-			err := json.Decoder(newStr).Decode(&nodeSends)
-			if err != nil {
-				panic(err)
-			}
-		*/
-		fmt.Fprintf(w, "Get data by params in POST - OK")
+		thisNodeStats := nodeStats{
+			1,
+			false,
+			"not running",
+			"empty",
+			"empty fragment",
+			"empty",
+		}
+
+		jsonNodeStats, err1 := json.Marshal(thisNodeStats)
+		if err1 != nil {
+			panic(err1)
+		}
+
+		fmt.Fprintf(w, "Get data by params in POST - OK"+string(jsonNodeStats))
 		//statusContent = "POST request handled, " + "Node id: " + string(nodeSends.id) + ", Echo content: " + nodeSends.content
 		statusContent = "POST request handled, " + newStr
 	}
 }
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
-
-	/*nodeOne := node{
-		1,
-		"Hello",
-	}
-
-	jsonNodeOne, err1 := json.Marshal(nodeOne)
-	if err1 != nil {
-		panic(err1)
-	}*/
 	r.ParseForm()
 
 	c := appengine.NewContext(r)
