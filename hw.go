@@ -112,11 +112,11 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		buf.ReadFrom(r.Body)
 		newStr := buf.String()
 
-		inputMsg := echoMessage{}
+		/*inputMsg := echoMessage{}
 		err2 := json.NewDecoder(r.Body).Decode(&inputMsg)
 		if err2 != nil {
 			panic(err2)
-		}
+		}*/
 
 		thisNodeStats := nodeStats{
 			1,
@@ -134,7 +134,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 
 		fmt.Fprintf(w, "Get data by params in POST - OK "+string(jsonNodeStats))
 		//statusContent = "POST request handled, " + "Node id: " + string(nodeSends.id) + ", Echo content: " + nodeSends.content
-		statusContent = "POST request handled, " + newStr + "Input message object content: " + inputMsg.Title + inputMsg.Content
+		statusContent = "POST request handled, " + newStr //+ "Input message object content: " + inputMsg.Title + inputMsg.Content
 	}
 }
 
