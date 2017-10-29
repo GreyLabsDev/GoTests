@@ -97,8 +97,8 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		bodyBytes, err := ioutil.ReadAll(r.Body)
 		fmt.Fprintf(w, "Get data by params in POST - OK")
-		statusContent = "POST request handled, " + "Node id: " + strings.Join(r.Form["nodeId"], " ") + ", Echo content: " + strings.Join(r.Form["echoContent"], " ")
 		fmt.Fprintf(w, string(bodyBytes))
+		statusContent = "POST request handled, " + "Node id: " + strings.Join(r.Form["nodeId"], " ") + ", Echo content: " + strings.Join(r.Form["echoContent"], " ")
 	}
 }
 
