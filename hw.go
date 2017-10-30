@@ -14,13 +14,30 @@ import (
 	"log"
 	"net/http"
 	"net/smtp"
+	"time"
 
 	"appengine"
 	"appengine/urlfetch"
 )
 
-var statusContent string = "Default status"
+//predefined parameters
 var maxNodes int = 10
+var isAliveCheckPeriod int = 500 //in millisecs
+
+//changeable parameters
+var statusContent string = "Default status"
+var nodesStates map[int]map[string]string{}
+/*
+example for this map
+var nodesStates map[int]map[string]string{
+	1: map[string]string{
+		"alive":"1",
+		"hasTask":"true",
+		"taskStatus":"completed",
+		"taskResult":"some_result_for_node"
+	},
+}
+*/
 
 type webPage struct {
 	Title string
@@ -30,7 +47,7 @@ type nodeStats struct {
 	NodeID           int    `json:"ID"`
 	NodeCount        int    `json:"nodeCount"`
 	HasTask          bool   `json:"hasTask"`
-	TaskStatus       string `json:"taskStatus"`
+	TaskStatus       string `json:"taskStatus"` //running-copleted-loaded
 	TaskResult       string `json:"taskResult"`
 	TaskFragmentBody string `json:"taskFragmentBody"`
 	TaskBody         string `json:"taskBody"`
@@ -41,7 +58,7 @@ type echoMessage struct {
 	Content string `json:"content"`
 }
 
-type gmailUser struct {
+/*type gmailUser struct {
 	name string
 	pswd string
 }
@@ -66,7 +83,7 @@ func sendMail(msg string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-}
+}*/
 
 //wrong func for Google App Engine deployment. Need to use appengine libs...=(
 func echo() {
@@ -141,9 +158,34 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+/*
+//Functions for isAlive checking realization
+func periodicTask(d time.Duration, f func(time.Time)) {
+	for t := range time.Tick(d) {
+		f(t)
+	}
+}
+
+func checkAliveNodes(t time.Tick) {
+	resp, err := http.Get("http://goappnode1.appspot.com/isalive")
+	if err != nil {
+		panic(err)
+	}
+
+}
+
 func isAliveServer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, 1)
 }
+
+func checkAliveStart(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func checkAliveStop(w http.ResponseWriter, r *http.Request) {
+
+}
+*/
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
 	msg := echoMessage{
