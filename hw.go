@@ -20,6 +20,7 @@ import (
 )
 
 var statusContent string = "Default status"
+var maxNodes int = 10
 
 type webPage struct {
 	Title string
@@ -27,6 +28,7 @@ type webPage struct {
 
 type nodeStats struct {
 	NodeID           int    `json:"ID"`
+	NodeCount        int    `json:"nodeCount"`
 	HasTask          bool   `json:"hasTask"`
 	TaskStatus       string `json:"taskStatus"`
 	TaskResult       string `json:"taskResult"`
@@ -120,6 +122,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 
 		thisNodeStats := nodeStats{
 			1,
+			2,
 			false,
 			"not running",
 			"empty",
@@ -136,6 +139,10 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		//statusContent = "POST request handled, " + "Node id: " + string(nodeSends.id) + ", Echo content: " + nodeSends.content
 		statusContent = "POST request handled, " + newStr //+ "Input message object content: " + inputMsg.Title + inputMsg.Content
 	}
+}
+
+func isAliveServer(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "true")
 }
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
@@ -176,8 +183,10 @@ func init() {
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
-	http.HandleFunc("/status", statusServer)
+	//service pages
 	http.HandleFunc("/echo", testEcho)
+	http.HandleFunc("/status", statusServer)
+	http.HandleFunc("/isalive", isAliveServer)
 
 	//Wrong code for App Enine - server cant understand what it need to show
 	//http.ListenAndServe(":80", nil)
