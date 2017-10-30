@@ -171,11 +171,12 @@ func checkAliveNodes(t time.Tick) {
 	}
 
 }
-
+*/
 func isAliveServer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, 1)
 }
 
+/*
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 
 }
