@@ -11,10 +11,7 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
-	"log"
 	"net/http"
-	"net/smtp"
-	"time"
 
 	"appengine"
 	"appengine/urlfetch"
@@ -26,7 +23,8 @@ var isAliveCheckPeriod int = 500 //in millisecs
 
 //changeable parameters
 var statusContent string = "Default status"
-nodesStates := make(map[int]map[string]string)
+
+//nodesStates := make(map[int]map[string]string)
 /*
 example for this map
 var nodesStates map[int]map[string]string{
