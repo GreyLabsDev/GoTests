@@ -142,7 +142,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func isAliveServer(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "true")
+	fmt.Fprint(w, 1)
 }
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
