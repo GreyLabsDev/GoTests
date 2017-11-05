@@ -137,7 +137,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 }
 
 //Functions for isAlive checking realization
-func checkIsAlive(nodeId int, req http.Request) {
+func checkIsAlive(nodeId int, req *http.Request) {
 	ctx := appengine.NewContext(req)
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 
