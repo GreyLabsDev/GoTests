@@ -84,10 +84,6 @@ func echo() {
 
 }
 
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
-}
-
 func startPage(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
@@ -220,17 +216,9 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	statusContent = "Response from node - " + string(respBody)
 }
 
-func showInfo(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Information page for test project.")
-	fmt.Fprintln(w, "Language - Go;")
-	fmt.Fprintln(w, "Platform - Google Application Engine;")
-}
-
 func init() {
 	//view pages
 	http.HandleFunc("/", startPage)
-	http.HandleFunc("/helloworld", helloWorld)
-	http.HandleFunc("/showinfo", showInfo)
 	//service pages
 	http.HandleFunc("/echo", testEcho)
 	http.HandleFunc("/status", statusServer)
