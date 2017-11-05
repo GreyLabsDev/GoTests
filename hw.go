@@ -12,6 +12,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"time"
 
 	"appengine"
@@ -137,16 +138,16 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 
 //Functions for isAlive checking realization
 func checkIsAlive(nodeId int) {
-	nodeUrl := "http://goappnode" + string(nodeId) + "0.appspot.com/"
+	nodeUrl := "http://goappnode" + strconv.Itoa(nodeId) + ".appspot.com/"
 	resp, err := http.Get(nodeUrl)
 	if err != nil {
 		panic(err)
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode == 200 {
-		statusLog += "Node #" + string(nodeId) + " - online"
+		statusLog += "Node #" + strconv.Itoa(nodeId) + " - online"
 	} else {
-		statusLog += "Node #" + string(nodeId) + " - offline"
+		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
 	}
 }
 
