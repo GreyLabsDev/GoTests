@@ -154,6 +154,7 @@ func checkIsAlive(nodeId int) {
 
 	ctx := appengine.NewContext(req)
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
+	resp, _ := client.Do(req)
 }
 
 func periodicTask(period time.Duration, task pFuncInt, taskArg int) {
