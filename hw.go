@@ -150,9 +150,9 @@ func checkIsAlive(nodeId int) {
 	}
 }
 
-func periodicTask(period time.Duration, task pFuncInt) {
+func periodicTask(period time.Duration, task pFuncInt, taskArg int) {
 	for {
-		task(1)
+		task(taskArg)
 		time.Sleep(period * time.Millisecond)
 	}
 }
@@ -172,7 +172,7 @@ func isAliveServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
-	go periodicTask(30000, checkIsAlive(1))
+	go periodicTask(30000, checkIsAlive, 1)
 }
 
 /*
