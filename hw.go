@@ -160,16 +160,6 @@ func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq *htt
 	}
 }
 
-/*
-func checkAliveNodes(t time.Tick) {
-	resp, err := http.Get("http://goappnode1.appspot.com/isalive")
-	if err != nil {
-		panic(err)
-	}
-
-}
-*/
-
 func isAliveServer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, 1)
 }
@@ -179,7 +169,7 @@ func logServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
-	go periodicTask(30000, checkIsAlive, 1, r)
+	go periodicTask(500, checkIsAlive, 1, r)
 }
 
 /*
