@@ -169,7 +169,7 @@ func logServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
-	go periodicTask(500, checkIsAlive, 1, r)
+	periodicTask(500, checkIsAlive, 1, r)
 }
 
 /*
