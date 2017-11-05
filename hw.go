@@ -171,7 +171,7 @@ func isAliveServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
-	go periodicTask(30000, checkAlive(1))
+	go periodicTask(30000, checkIsAlive(1))
 }
 
 /*
