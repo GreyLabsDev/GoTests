@@ -135,7 +135,9 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		statusContent = "POST request handled, " + newStr //+ "Input message object content: " + inputMsg.Title + inputMsg.Content
 	}
 }
-
+func BackgroundContext() context.Context {
+	return internal.BackgroundContext()
+}
 //Functions for isAlive checking realization
 func checkIsAlive(nodeId int) {
 	//req, _ := http.NewRequest("GET", "http://goappnode0.appspot.com/", nil)
@@ -152,7 +154,7 @@ func checkIsAlive(nodeId int) {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
 	}*/
 
-	ctx := internal.BackgroundContext()
+	ctx := BackgroundContext()
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 	resp, _ := client.Get(nodeUrl)
 	statusContent += string(resp.StatusCode)
