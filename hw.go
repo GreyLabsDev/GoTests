@@ -152,7 +152,7 @@ func checkIsAlive(nodeId int) {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
 	}*/
 
-	ctx := BackgroundContext()
+	ctx := internal.BackgroundContext()
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 	resp, _ := client.Get(nodeUrl)
 	statusContent += string(resp.StatusCode)
