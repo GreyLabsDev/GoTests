@@ -178,6 +178,10 @@ func isAliveServer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, 1)
 }
 
+func logServer(w http.ResponseWriter, r *http.Request) {
+	fmt.Print(statusLog)
+}
+
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	go periodicTask(30000, checkIsAlive, 1, r)
 }
@@ -232,6 +236,7 @@ func init() {
 	http.HandleFunc("/status", statusServer)
 	http.HandleFunc("/isalive", isAliveServer)
 	http.HandleFunc("/startcheck", checkAliveStart)
+	http.HandleFunc("/logs", logServer)
 
 	//Wrong code for App Enine - server cant understand what it need to show
 	//http.ListenAndServe(":80", nil)
