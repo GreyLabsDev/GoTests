@@ -141,7 +141,7 @@ func checkIsAlive(nodeId int) {
 	req, _ := http.NewRequest("GET", "http://goappnode"+strconv.Itoa(nodeId)+".appspot.com/", nil)
 
 	nodeUrl := "http://goappnode" + strconv.Itoa(nodeId) + ".appspot.com/"
-	resp, err := http.Get(nodeUrl)
+	/*resp, err := http.Get(nodeUrl)
 	if err != nil {
 		panic(err)
 	}
@@ -150,11 +150,12 @@ func checkIsAlive(nodeId int) {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - online"
 	} else {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
-	}
+	}*/
 
 	ctx := appengine.NewContext(req)
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 	resp, _ := client.Do(req)
+	statusContent += string(resp.StatusCode)
 }
 
 func periodicTask(period time.Duration, task pFuncInt, taskArg int) {
