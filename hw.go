@@ -61,7 +61,7 @@ type echoMessage struct {
 
 //types for periodical functions
 type pFunc func()
-type pFuncInt func(int, http.Request)
+type pFuncInt func(int, *http.Request)
 
 //wrong func for Google App Engine deployment. Need to use appengine libs...=(
 func echo() {
