@@ -152,7 +152,8 @@ func checkIsAlive(nodeId int) {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
 	}
 
-	client := http.Client{Transport: &urlfetch.Transport{Context: fromContext(BackgroundContext())}}
+	ctx := appengine.NewContext(r * http.Request)
+	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 }
 
 func periodicTask(period time.Duration, task pFuncInt, taskArg int) {
