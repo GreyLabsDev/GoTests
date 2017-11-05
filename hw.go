@@ -12,12 +12,11 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"time"
 
 	"appengine"
 	"appengine/urlfetch"
-	"google.golang.org/appengine/internal"
-	"golang.org/x/net/context"
 )
 
 //predefined parameters
@@ -136,15 +135,15 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 		statusContent = "POST request handled, " + newStr //+ "Input message object content: " + inputMsg.Title + inputMsg.Content
 	}
 }
-func BackgroundContext() context.Context {
-	return internal.BackgroundContext()
-}
-//Functions for isAlive checking realization
-func checkIsAlive(nodeId int) {
-	//req, _ := http.NewRequest("GET", "http://goappnode0.appspot.com/", nil)
 
-	//nodeUrl := "http://goappnode" + strconv.Itoa(nodeId) + ".appspot.com/"
-	/*resp, err := http.Get(nodeUrl)
+//Functions for isAlive checking realization
+func checkIsAlive(nodeId int, req http.Request) {
+	ctx := appengine.NewContext(req)
+	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
+
+	nodeUrl := "http://goappnode" + strconv.Itoa(nodeId) + ".appspot.com/"
+
+	resp, err := client.Get(nodeUrl)
 	if err != nil {
 		panic(err)
 	}
@@ -153,17 +152,14 @@ func checkIsAlive(nodeId int) {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - online"
 	} else {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
-	}*/
+	}
 
-	ctx := BackgroundContext()
-	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
-	resp, _ := client.Get(nodeUrl)
-	statusContent += string(resp.StatusCode)
+	statusLog += string(resp.StatusCode)
 }
 
-func periodicTask(period time.Duration, task pFuncInt, taskArg int) {
+func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq http.Request) {
 	for {
-		task(taskArg)
+		task(taskArg, taskReq)
 		time.Sleep(period * time.Millisecond)
 	}
 }
@@ -183,7 +179,7 @@ func isAliveServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
-	go periodicTask(30000, checkIsAlive, 1)
+	go periodicTask(30000, checkIsAlive, 1, r)
 }
 
 /*
