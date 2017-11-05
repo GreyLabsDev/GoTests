@@ -16,7 +16,7 @@ import (
 
 	"appengine"
 	"appengine/urlfetch"
-	"appengine/internal"
+	"google.golang.org/appengine/internal"
 )
 
 //predefined parameters
