@@ -143,7 +143,7 @@ func checkIsAlive(nodeId int, req *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	defer resp.Body.Close()
+
 	if resp.StatusCode == 200 {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - online"
 	} else {
