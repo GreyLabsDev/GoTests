@@ -12,6 +12,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"time"
 
 	"appengine"
 	"appengine/urlfetch"
@@ -23,6 +24,7 @@ var isAliveCheckPeriod int = 500 //in millisecs
 
 //changeable parameters
 var statusContent string = "Default status"
+var statusLog string = ""
 
 //nodesStates := make(map[int]map[string]string)
 /*
@@ -56,32 +58,8 @@ type echoMessage struct {
 	Content string `json:"content"`
 }
 
-/*type gmailUser struct {
-	name string
-	pswd string
-}
-
-func sendMail(msg string) {
-	mailUser := gmailUser{
-		"golangapplication@gmail.com",
-		"",
-	}
-	auth := smtp.PlainAuth("",
-		mailUser.name,
-		mailUser.pswd,
-		"smtp.gmail.com",
-	)
-	err := smtp.SendMail(
-		"smtp.gmail.com:587",
-		auth,
-		mailUser.name,
-		[]string{"rec@mail.com"},
-		[]byte(msg),
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-}*/
+//types for periodical functions
+type pFunc func()
 
 //wrong func for Google App Engine deployment. Need to use appengine libs...=(
 func echo() {
@@ -156,14 +134,29 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-/*
 //Functions for isAlive checking realization
-func periodicTask(d time.Duration, f func(time.Time)) {
-	for t := range time.Tick(d) {
-		f(t)
+func checkIsAlive(nodeId int) {
+	nodeUrl := "http://goappnode" + nodeId + "0.appspot.com/"
+	resp, err := http.Get(nodeUrl)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	if resp.Status == 200 {
+		statusLog += "Node #" + nodeId + " - online"
+	} else {
+		statusLog += "Node #" + nodeId + " - offline"
 	}
 }
 
+func periodicTask(period time.Duration, task pFunc) {
+	for {
+		task()
+		time.Sleep(period * time.Millisecond)
+	}
+}
+
+/*
 func checkAliveNodes(t time.Tick) {
 	resp, err := http.Get("http://goappnode1.appspot.com/isalive")
 	if err != nil {
@@ -177,11 +170,11 @@ func isAliveServer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, 1)
 }
 
-/*
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
-
+	go periodicTask(30000, checkAlive(1))
 }
 
+/*
 func checkAliveStop(w http.ResponseWriter, r *http.Request) {
 
 }
@@ -222,6 +215,7 @@ func showInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func init() {
+	//view pages
 	http.HandleFunc("/", startPage)
 	http.HandleFunc("/helloworld", helloWorld)
 	http.HandleFunc("/showinfo", showInfo)
@@ -229,6 +223,7 @@ func init() {
 	http.HandleFunc("/echo", testEcho)
 	http.HandleFunc("/status", statusServer)
 	http.HandleFunc("/isalive", isAliveServer)
+	http.HandleFunc("/startcheck", checkAliveStart)
 
 	//Wrong code for App Enine - server cant understand what it need to show
 	//http.ListenAndServe(":80", nil)
