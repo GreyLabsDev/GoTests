@@ -138,7 +138,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 
 //Functions for isAlive checking realization
 func checkIsAlive(nodeId int) {
-	req, _ := http.NewRequest("GET", "http://goappnode"+strconv.Itoa(nodeId)+".appspot.com/", nil)
+	req, _ := http.NewRequest("GET", "http://goappnode0.appspot.com/", nil)
 
 	nodeUrl := "http://goappnode" + strconv.Itoa(nodeId) + ".appspot.com/"
 	/*resp, err := http.Get(nodeUrl)
