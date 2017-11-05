@@ -16,6 +16,7 @@ import (
 
 	"appengine"
 	"appengine/urlfetch"
+	"appengine/internal"
 )
 
 //predefined parameters
