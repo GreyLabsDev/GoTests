@@ -157,7 +157,7 @@ func checkIsAlive(nodeId int, req *http.Request) {
 	statusLog += string(resp.StatusCode)
 }
 
-func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq http.Request) {
+func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq *http.Request) {
 	for {
 		task(taskArg, taskReq)
 		time.Sleep(period * time.Millisecond)
