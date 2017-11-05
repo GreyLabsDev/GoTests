@@ -60,6 +60,7 @@ type echoMessage struct {
 
 //types for periodical functions
 type pFunc func()
+type pFuncInt func(int)
 
 //wrong func for Google App Engine deployment. Need to use appengine libs...=(
 func echo() {
@@ -149,9 +150,9 @@ func checkIsAlive(nodeId int) {
 	}
 }
 
-func periodicTask(period time.Duration, task pFunc) {
+func periodicTask(period time.Duration, task pFuncInt) {
 	for {
-		task()
+		task(1)
 		time.Sleep(period * time.Millisecond)
 	}
 }
