@@ -61,7 +61,7 @@ type echoMessage struct {
 
 //types for periodical functions
 type pFunc func()
-type pFuncInt func(int)
+type pFuncInt func(int, http.Request)
 
 //wrong func for Google App Engine deployment. Need to use appengine libs...=(
 func echo() {
@@ -137,7 +137,7 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 }
 
 //Functions for isAlive checking realization
-func checkIsAlive(nodeId int, req *http.Request) {
+func checkIsAlive(nodeId int, req http.Request) {
 	ctx := appengine.NewContext(req)
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 
@@ -157,7 +157,7 @@ func checkIsAlive(nodeId int, req *http.Request) {
 	statusLog += string(resp.StatusCode)
 }
 
-func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq *http.Request) {
+func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq http.Request) {
 	for {
 		task(taskArg, taskReq)
 		time.Sleep(period * time.Millisecond)
@@ -174,7 +174,7 @@ func checkAliveNodes(t time.Tick) {
 }
 */
 
-func isAliveServer(w http.ResponseWriter, r *http.Request) {
+func isAliveServer(w http.ResponseWriter, r http.Request) {
 	fmt.Fprint(w, 1)
 }
 
