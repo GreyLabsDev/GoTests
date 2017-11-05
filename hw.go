@@ -152,7 +152,7 @@ func checkIsAlive(nodeId int) {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
 	}
 
-	ctx := appengine.NewContext(r * http.Request)
+	ctx := appengine.NewContext(*http.Request)
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 }
 
