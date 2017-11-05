@@ -7,6 +7,7 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -138,6 +139,8 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 
 //Functions for isAlive checking realization
 func checkIsAlive(nodeId int) {
+	req, _ := http.NewRequest(GET, "http://goappnode"+strconv.Itoa(nodeId)+".appspot.com/", nil)
+
 	nodeUrl := "http://goappnode" + strconv.Itoa(nodeId) + ".appspot.com/"
 	resp, err := http.Get(nodeUrl)
 	if err != nil {
@@ -150,7 +153,7 @@ func checkIsAlive(nodeId int) {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
 	}
 
-	ctx := appengine.NewContext(request.Request)
+	ctx := context.Background()
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 }
 
