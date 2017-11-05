@@ -136,16 +136,16 @@ func statusServer(w http.ResponseWriter, r *http.Request) {
 
 //Functions for isAlive checking realization
 func checkIsAlive(nodeId int) {
-	nodeUrl := "http://goappnode" + nodeId + "0.appspot.com/"
+	nodeUrl := "http://goappnode" + string(nodeId) + "0.appspot.com/"
 	resp, err := http.Get(nodeUrl)
 	if err != nil {
 		panic(err)
 	}
 	defer resp.Body.Close()
-	if resp.Status == 200 {
-		statusLog += "Node #" + nodeId + " - online"
+	if resp.StatusCode == 200 {
+		statusLog += "Node #" + string(nodeId) + " - online"
 	} else {
-		statusLog += "Node #" + nodeId + " - offline"
+		statusLog += "Node #" + string(nodeId) + " - offline"
 	}
 }
 
