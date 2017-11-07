@@ -147,7 +147,7 @@ func checkIsAlive(nodeId int, req *http.Request) {
 	if resp.StatusCode == 200 {
 		statusLog = statusLog + "Node #" + strconv.Itoa(nodeId) + " - online"
 	} else {
-		statusLog = statusLog "Node #" + strconv.Itoa(nodeId) + " - offline"
+		statusLog = statusLog + "Node #" + strconv.Itoa(nodeId) + " - offline"
 	}
 
 	statusLog = string(resp.StatusCode)
