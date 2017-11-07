@@ -153,10 +153,11 @@ func checkIsAlive(nodeId int, req *http.Request) {
 	//statusLog = string(resp.StatusCode)
 }
 
-func alivePeriodicTest(r *http.Request) {
+func alivePeriodicTest(r *http.Request, done chan int) {
 	for i := 0; i < 10; i++ {
 		checkIsAlive(1, r)
 	}
+	done <- 0
 }
 
 func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq *http.Request) {
@@ -177,7 +178,9 @@ func logServer(w http.ResponseWriter, r *http.Request) {
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	//go periodicTask(200, checkIsAlive, 1, r)
 	//checkIsAlive(1, r)
-	alivePeriodicTest(r)
+	done := make(chan int)
+	go alivePeriodicTest(r)
+	<-done
 }
 
 /*
