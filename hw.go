@@ -165,7 +165,7 @@ func isAliveServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func logServer(w http.ResponseWriter, r *http.Request) {
-	fmt.Print(statusLog)
+	fmt.Fprintf(w, statusLog)
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
