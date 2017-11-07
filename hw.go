@@ -179,7 +179,7 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	//go periodicTask(200, checkIsAlive, 1, r)
 	//checkIsAlive(1, r)
 	done := make(chan int)
-	go alivePeriodicTest(r)
+	go alivePeriodicTest(r, done)
 	<-done
 }
 
