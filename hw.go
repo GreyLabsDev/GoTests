@@ -149,8 +149,7 @@ func checkIsAlive(nodeId int, req *http.Request) {
 	} else {
 		statusLog = statusLog + "Node #" + strconv.Itoa(nodeId) + " - offline"
 	}
-
-	statusLog = string(resp.StatusCode)
+	//statusLog = string(resp.StatusCode)
 }
 
 func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq *http.Request) {
@@ -169,7 +168,7 @@ func logServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
-	periodicTask(500, checkIsAlive, 1, r)
+	go periodicTask(500, checkIsAlive, 1, r)
 }
 
 /*
