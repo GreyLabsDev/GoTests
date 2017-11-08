@@ -154,7 +154,7 @@ func checkIsAlive(nodeId int, req *http.Request) {
 }
 
 func checkIsAliveCtx(nodeId int, c appengine.Context) {
-	ctx := appengine.NewContext(req)
+	ctx := c
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 
 	nodeUrl := "http://goappnode" + strconv.Itoa(nodeId) + ".appspot.com/"
