@@ -16,7 +16,6 @@ import (
 	"time"
 
 	"appengine"
-	"appengine/runtime"
 	"appengine/urlfetch"
 )
 
@@ -199,7 +198,7 @@ func isAliveServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func logServer(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, statusLog + statusLog2)
+	fmt.Fprintf(w, statusLog+statusLog2)
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
@@ -209,16 +208,15 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	//ctx := appengine.NewContext(r)
 	//runtime.RunInBackground(ctx, aliveTest)
 	go func() {
-		for i:=1; i<5; i++ {
+		for i := 1; i < 5; i++ {
 			statusLog += " oLOLo"
 		}
-		
-	}
+	}()
 	go func() {
-		for i:=1; i<5; i++ {
+		for i := 1; i < 5; i++ {
 			statusLogTwo += " oLOLo"
 		}
-	}
+	}()
 }
 
 /*
