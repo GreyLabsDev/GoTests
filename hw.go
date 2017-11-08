@@ -179,7 +179,7 @@ func alivePeriodicTest(r *http.Request, done chan int) {
 	done <- 0
 }
 
-func aliveTest(c *appengine.Context) {
+func aliveTest(c appengine.Context) {
 	for i := 0; i < 10; i++ {
 		time.Sleep(150 * time.Millisecond)
 		checkIsAliveCtx(1, c)
