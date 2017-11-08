@@ -26,7 +26,7 @@ var isAliveCheckPeriod int = 500 //in millisecs
 //changeable parameters
 var statusContent string = "Default status"
 var statusLog string = "Log: "
-var statusLog2 string = "Log2: "
+var statusLogTwo string = "Log2: "
 
 //nodesStates := make(map[int]map[string]string)
 /*
