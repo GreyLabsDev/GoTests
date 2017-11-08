@@ -179,12 +179,11 @@ func alivePeriodicTest(r *http.Request, done chan int) {
 	done <- 0
 }
 
-func aliveTest(c *appengine.Context) string {
+func aliveTest(c *appengine.Context) {
 	for i := 0; i < 10; i++ {
 		time.Sleep(150 * time.Millisecond)
 		checkIsAliveCtx(1, c)
 	}
-	return "check end"
 }
 
 func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq *http.Request) {
