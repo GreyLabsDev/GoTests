@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"appengine"
+	"appengine/runtime"
 	"appengine/urlfetch"
 )
 
@@ -160,6 +161,14 @@ func alivePeriodicTest(r *http.Request, done chan int) {
 	done <- 0
 }
 
+func aliveTest() {
+	for i := 0; i < 10; i++ {
+		time.Sleep(150 * time.Millisecond)
+		checkIsAlive(1, r)
+	}
+	done <- 0
+}
+
 func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq *http.Request) {
 	for {
 		task(taskArg, taskReq)
@@ -178,9 +187,10 @@ func logServer(w http.ResponseWriter, r *http.Request) {
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	//go periodicTask(200, checkIsAlive, 1, r)
 	//checkIsAlive(1, r)
-	done := make(chan int)
-	go alivePeriodicTest(r, done)
-	<-done
+	//alivePeriodicTest(r)
+	ctx := appengine.NewContext(r)
+	runtime.RunInBackground(ctx, aliveTest)
+
 }
 
 /*
