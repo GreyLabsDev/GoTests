@@ -144,11 +144,9 @@ func checkIsAlive(nodeId int, req *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-
 	if resp.StatusCode != 200 {
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
 	} else {
-
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - online"
 	}
 }
@@ -209,7 +207,7 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	//runtime.RunInBackground(ctx, aliveTest)
 	go func() {
 		for i := 1; i < 5; i++ {
-			statusLog += " oLOLo"
+			checkIsAlive(1, r)
 		}
 	}()
 	go func() {
