@@ -27,6 +27,7 @@ var isAliveCheckPeriod int = 500 //in millisecs
 //changeable parameters
 var statusContent string = "Default status"
 var statusLog string = "Log: "
+var statusLog2 string = "Log2: "
 
 //nodesStates := make(map[int]map[string]string)
 /*
@@ -198,16 +199,26 @@ func isAliveServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func logServer(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, statusLog)
+	fmt.Fprintf(w, statusLog + statusLog2)
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	//go periodicTask(200, checkIsAlive, 1, r)
 	//checkIsAlive(1, r)
 	//alivePeriodicTest(r)
-	ctx := appengine.NewContext(r)
-	runtime.RunInBackground(ctx, aliveTest)
-
+	//ctx := appengine.NewContext(r)
+	//runtime.RunInBackground(ctx, aliveTest)
+	go func() {
+		for i:=1; i<5; i++ {
+			statusLog += " oLOLo"
+		}
+		
+	}
+	go func() {
+		for i:=1; i<5; i++ {
+			statusLogTwo += " oLOLo"
+		}
+	}
 }
 
 /*
