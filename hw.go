@@ -153,6 +153,25 @@ func checkIsAlive(nodeId int, req *http.Request) {
 	}
 }
 
+func checkIsAliveCtx(nodeId int, c appengine.Context) {
+	ctx := appengine.NewContext(req)
+	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
+
+	nodeUrl := "http://goappnode" + strconv.Itoa(nodeId) + ".appspot.com/"
+
+	resp, err := client.Get(nodeUrl)
+	if err != nil {
+		panic(err)
+	}
+
+	if resp.StatusCode != 200 {
+		statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
+	} else {
+
+		statusLog += "Node #" + strconv.Itoa(nodeId) + " - online"
+	}
+}
+
 func alivePeriodicTest(r *http.Request, done chan int) {
 	for i := 0; i < 10; i++ {
 		checkIsAlive(1, r)
@@ -160,10 +179,10 @@ func alivePeriodicTest(r *http.Request, done chan int) {
 	done <- 0
 }
 
-func aliveTest(r *http.Request) string {
+func aliveTest(c *appengine.Context) string {
 	for i := 0; i < 10; i++ {
 		time.Sleep(150 * time.Millisecond)
-		checkIsAlive(1, r)
+		checkIsAliveCtx(1, c)
 	}
 	return "check end"
 }
@@ -188,7 +207,7 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	//checkIsAlive(1, r)
 	//alivePeriodicTest(r)
 	ctx := appengine.NewContext(r)
-	runtime.RunInBackground(ctx, aliveTest(r))
+	runtime.RunInBackground(ctx, aliveTest)
 
 }
 
