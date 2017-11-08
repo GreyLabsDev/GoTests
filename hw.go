@@ -179,10 +179,11 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	//alivePeriodicTest(r)
 	//ctx := appengine.NewContext(r)
 	//runtime.RunInBackground(ctx, aliveTest)
-	ctx := appengine.NewContext(r)
+
+	/*ctx := appengine.NewContext(r)
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 
-	/*go func() {
+	go func() {
 		for i := 1; i < 5; i++ {
 			nodeUrl := "http://goappnode1.appspot.com/"
 
