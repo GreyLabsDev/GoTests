@@ -161,7 +161,7 @@ func alivePeriodicTest(r *http.Request, done chan int) {
 	done <- 0
 }
 
-func aliveTest() {
+func aliveTest(r *http.Request) {
 	for i := 0; i < 10; i++ {
 		time.Sleep(150 * time.Millisecond)
 		checkIsAlive(1, r)
@@ -189,7 +189,7 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	//checkIsAlive(1, r)
 	//alivePeriodicTest(r)
 	ctx := appengine.NewContext(r)
-	runtime.RunInBackground(ctx, aliveTest)
+	runtime.RunInBackground(ctx, aliveTest(r))
 
 }
 
