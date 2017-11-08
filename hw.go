@@ -151,7 +151,6 @@ func checkIsAlive(nodeId int, req *http.Request) {
 
 		statusLog += "Node #" + strconv.Itoa(nodeId) + " - online"
 	}
-	//statusLog = string(resp.StatusCode)
 }
 
 func alivePeriodicTest(r *http.Request, done chan int) {
@@ -161,12 +160,12 @@ func alivePeriodicTest(r *http.Request, done chan int) {
 	done <- 0
 }
 
-func aliveTest(r *http.Request) {
+func aliveTest(r *http.Request) string {
 	for i := 0; i < 10; i++ {
 		time.Sleep(150 * time.Millisecond)
 		checkIsAlive(1, r)
 	}
-	done <- 0
+	return "check end"
 }
 
 func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq *http.Request) {
