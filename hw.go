@@ -182,7 +182,7 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
 
-	go func() {
+	/*go func() {
 		for i := 1; i < 5; i++ {
 			nodeUrl := "http://goappnode1.appspot.com/"
 
@@ -196,7 +196,7 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 				statusLog += "Node #1 - online"
 			}
 		}
-	}()
+	}()*/
 	go func() {
 		for i := 1; i < 5; i++ {
 			statusLogTwo += " oLOLo"
