@@ -158,13 +158,6 @@ func alivePeriodicTest(r *http.Request, done chan int) {
 	done <- 0
 }
 
-func aliveTest(c appengine.Context) {
-	for i := 0; i < 10; i++ {
-		time.Sleep(150 * time.Millisecond)
-		checkIsAliveCtx(1, c)
-	}
-}
-
 func periodicTask(period time.Duration, task pFuncInt, taskArg int, taskReq *http.Request) {
 	for {
 		task(taskArg, taskReq)
@@ -191,16 +184,16 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 
 	go func() {
 		for i := 1; i < 5; i++ {
-			nodeUrl := "http://goappnode" + strconv.Itoa(nodeId) + ".appspot.com/"
+			nodeUrl := "http://goappnode1.appspot.com/"
 
 			resp, err := client.Get(nodeUrl)
 			if err != nil {
 				panic(err)
 			}
 			if resp.StatusCode != 200 {
-				statusLog += "Node #" + strconv.Itoa(nodeId) + " - offline"
+				statusLog += "Node #1 - offline"
 			} else {
-				statusLog += "Node #" + strconv.Itoa(nodeId) + " - online"
+				statusLog += "Node #1 - online"
 			}
 		}
 	}()
