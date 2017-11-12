@@ -182,11 +182,9 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 
 	/*ctx := appengine.NewContext(r)
 	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
-
 	go func() {
 		for i := 1; i < 5; i++ {
 			nodeUrl := "http://goappnode1.appspot.com/"
-
 			resp, err := client.Get(nodeUrl)
 			if err != nil {
 				panic(err)
@@ -207,7 +205,6 @@ func checkAliveStart(w http.ResponseWriter, r *http.Request) {
 
 /*
 func checkAliveStop(w http.ResponseWriter, r *http.Request) {
-
 }
 */
 
