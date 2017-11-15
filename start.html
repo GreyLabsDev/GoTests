@@ -7,7 +7,7 @@
     </head>
     <style> 
         input[type=text] {
-            width: 45%;
+            width: 40%;
             padding: 10px 10px;
             box-sizing: border-box;
             border: 3px solid #3F51B5;
@@ -46,9 +46,11 @@
 <body class="w3-black">
     <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-indigo" style="display:none" id="navigationBar">
         <button class="w3-bar-item w3-button w3-red" onclick="closeNavigation()">Close &times;</button>
-        <a href="http://goappnode0.appspot.com/startcheck" class="w3-bar-item w3-button">Start check</a>
-        <a href="http://goappnode0.appspot.com/logs" class="w3-bar-item w3-button">Logs</a>
+        <a href="http://goappnode0.appspot.com/updinfo" class="w3-bar-item w3-button">Update cluster info</a>
+        <a href="http://goappnode0.appspot.com/log" class="w3-bar-item w3-button">Logs</a>
         <a href="http://goappnode0.appspot.com/status" class="w3-bar-item w3-button">Status</a>
+        <a href="http://goappnode0.appspot.com/clean" class="w3-bar-item w3-button">Clean logs</a>
+        <a href="http://goappnode0.appspot.com/messenger" class="w3-bar-item w3-button">Nodes messenger</a>
     </div>
     <div id="main">
         <div class="w3-indigo">
@@ -70,19 +72,16 @@
         </div>
         <div class="w3-container w3-black" style="height: 100%">
             <h3>Hello, test application started.</h3>
-            <p>- /helloworld - show title page</p>
-            <p>- /showinfo - show information about this thing</p>
-            <p>Or you can use left navigation bar to go to this pages</p>
-                <p>Send test POST request to cluster member</p>
-            <form action="/echo" method="post">
-                <p><label for="nodeId">Node ID:</label></p>
-                <p><input type="text" id="nodeIdIn" name="nodeId" value=""></p>
-                <p><label for="echoContent">Request content:</label></p>
-                <p><input type="text" id="echoContentIn" name="echoContent" value=""></p>
-                <p><input class="w3-button w3-indigo" type="submit" id="sendEchoBtn" name="echoBtn" value="Send Echo"><input class="w3-button w3-red" type="reset" id="resetEchoBtn" name="echoBtn" value="Reset Echo settings"></p>    
+            <p>You can use left navigation bar to go to this pages</p>
+            <p>Set up you task, and start it!</p>
+            <form action="/task" method="post" id="formOne">
+                <p><label for="nodeId">Task word:</label></p>
+                <p><input type="text" id="taskWord" name="taskWord" value=""></p>
+                <p><label for="nodeId">Task body:</label></p>
+                <p><input type="text" id="taskBody" name="taskBody" value=""></p>
+                <p><input class="w3-button w3-indigo" type="submit" id="startTask" name="startTask" value="Start task"><input class="w3-button w3-red" type="reset" id="cleanTask" name="cleanTask" value="Clean task content"></p>
             </form>
-            <p>Google Application Engine + Golang + HTML5 (w3.css)</p>
-            <p>GreyLabs</p>
+            <p>GreyLabs. Heroku + Golang + HTML5 (w3.css)</p>
             <a href="https://github.com/GreyLabsDev/GoTests" class="w3-button w3-indigo" >Source on GitHub</a>
             <p><a href="https://golang.org/"><img src="http://img.stanleylieber.com/src/18343/img/1471307700.jpg" class="w3-image w3-hover-opacity" alt="Golang" style="width: 70px; height: 70px"></a></p>
         </div>
