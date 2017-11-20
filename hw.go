@@ -244,7 +244,7 @@ func changeTheme(newTheme string){
 	w3Count := strings.Count(s, themeData[thisTheme]["name"])
 	colCount := strings.Count(s, themeData[thisTheme]["code"])
 	s1 := strings.Replace(s, themeData[thisTheme]["name"], themeData[newTheme]["name"], w3Count)
-	s2 := strings.Replace(s1, themeData[thisTheme]["code"], themeData[newTheme]["code"], w3Count)
+	s2 := strings.Replace(s1, themeData[thisTheme]["code"], themeData[newTheme]["code"], colCount)
 	wr, _ := os.Open("start.html")
 	thisTheme = newTheme
 	fmt.Fprintf(wr, s2)
@@ -254,12 +254,6 @@ func changeTheme(newTheme string){
 func themeServer(w http.ResponseWriter, r *http.Request) {
 	switch r.Method{
 	case "POST":
-		buf := bytes.NewBuffer(nil)
-		f, _ := os.Open("start.html") 
-		io.Copy(buf, f)           
-		f.Close()
-		s := string(buf.Bytes())
-
 		r.ParseForm()
 		changeTheme(r.FormValue("color"))
 		}	
