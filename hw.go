@@ -28,18 +28,10 @@ var statusContent string = "Default status"
 var statusLog string = "Log: "
 var statusLogTwo string = "Log2: "
 
-//nodesStates := make(map[int]map[string]string)
-/*
-example for this map
-var nodesStates map[int]map[string]string{
-	1: map[string]string{
-		"alive":"1",
-		"hasTask":"true",
-		"taskStatus":"completed",
-		"taskResult":"some_result_for_node"
-	},
-}
-*/
+///THEME
+var thisTheme string = "Indigo"
+var themeData map[string]map[string]string 
+///THEME
 
 type webPage struct {
 	Title string
@@ -174,39 +166,12 @@ func logServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func checkAliveStart(w http.ResponseWriter, r *http.Request) {
-	//go periodicTask(200, checkIsAlive, 1, r)
-	//checkIsAlive(1, r)
-	//alivePeriodicTest(r)
-	//ctx := appengine.NewContext(r)
-	//runtime.RunInBackground(ctx, aliveTest)
-
-	/*ctx := appengine.NewContext(r)
-	client := http.Client{Transport: &urlfetch.Transport{Context: ctx}}
-	go func() {
-		for i := 1; i < 5; i++ {
-			nodeUrl := "http://goappnode1.appspot.com/"
-			resp, err := client.Get(nodeUrl)
-			if err != nil {
-				panic(err)
-			}
-			if resp.StatusCode != 200 {
-				statusLog += "Node #1 - offline"
-			} else {
-				statusLog += "Node #1 - online"
-			}
-		}
-	}()*/
 	go func() {
 		for i := 1; i < 5; i++ {
 			statusLogTwo += " oLOLo"
 		}
 	}()
 }
-
-/*
-func checkAliveStop(w http.ResponseWriter, r *http.Request) {
-}
-*/
 
 func testEcho(w http.ResponseWriter, r *http.Request) {
 	msg := echoMessage{
@@ -236,7 +201,74 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 	statusContent = "Response from node - " + string(respBody)
 }
 
+
+///THEME
+func initTheme() {
+	themeData = {
+		"Red" : map[string]string{
+			"code" : "#F44336",
+			"name" : "w3-red"
+		},
+		"Pink" : map[string]string{
+			"code" : "#E91E63",
+			"name" : "w3-pink"
+		},
+		"Purple" : map[string]string{
+			"code" : "#9C27B0",
+			"name" : "w3-purple"
+		},
+		"Indigo" : map[string]string{
+			"code" : "#3F51B5",
+			"name" : "w3-indigo"
+		},
+		"Teal" : map[string]string{
+			"code" : "#009688",
+			"name" : "w3-real"
+		},
+		"Green" : map[string]string{
+			"code" : "#4CAF50",
+			"name" : "w3-green"
+		},
+	}
+}
+
+func changeTheme(newTheme string){
+	buf := bytes.NewBuffer(nil)
+	f, _ := os.Open("start.html") 
+	io.Copy(buf, f)           
+	f.Close()
+	s := string(buf.Bytes())
+	w3Count := strings.Count(s, themeData[thisTheme]["name"])
+	colCount := strings.Count(s, themeData[thisTheme]["code"])
+	s1 := strings.Replace(s, themeData[thisTheme]["name"], themeData[newTheme]["name"], w3Count)
+	s2 := strings.Replace(s1, themeData[thisTheme]["code"], themeData[newTheme]["code"], w3Count)
+	wr, _ := os.Open("start.html")
+	thisTheme = newTheme
+	fmt.Fprintf(wr, s2)
+	defer wr.Close()
+}
+
+func themeServer(w http.ResponseWriter, r *http.Request) {
+	switch r.Method{
+	case "POST":
+		buf := bytes.NewBuffer(nil)
+		f, _ := os.Open("start.html") 
+		io.Copy(buf, f)           
+		f.Close()
+		s := string(buf.Bytes())
+
+		r.ParseForm()
+		changeTheme(r.FormValue("color"))
+		}
+	}
+}
+///THEME
+
 func init() {
+	///THEME
+	initTheme()
+	///THEME
+
 	//view pages
 	http.HandleFunc("/", startPage)
 	//service pages
@@ -246,14 +278,7 @@ func init() {
 	http.HandleFunc("/startcheck", checkAliveStart)
 	http.HandleFunc("/logs", logServer)
 
-	//Wrong code for App Enine - server cant understand what it need to show
-	//http.ListenAndServe(":80", nil)
+	///THEME
+	http.HandleFunc("/theme", themeServer)
+	///THEME
 }
-
-//this func not needed for deploy on Google App Engine, init() func replace main()
-/*
-func main() {
-	//fmt.Println("Hello, test server started on 8080 port.\n - /helloworld - show title page\n - /showinfo - show information about this thing")
-	//http.ListenAndServe(":8080", nil)
-	go sender()
-}*/
