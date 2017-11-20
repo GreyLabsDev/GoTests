@@ -32,11 +32,9 @@
     </style>
     <script>
         function openNavigation() {
-
             document.getElementById("navigationBar").style.display = "block";
             }
         function closeNavigation() {
-
             document.getElementById("navigationBar").style.display = "none";
             document.getElementById("openNav").style.display = "inline-block";
             }
@@ -59,14 +57,18 @@
         <button id="openNav" class="w3-button w3-indigo w3-large" onclick="openNavigation()">&#9776; Navigation</button>
             <div class="w3-dropdown-hover w3-right">
                 <button class="w3-button w3-large">Theme &#9681; </button>
+                
                 <div class="w3-dropdown-content w3-bar-block w3-indigo w3-animate-opacity" id="themesMenu" style="right:0">
-                <a href="http://goappnode0.appspot.com/theme" class="w3-bar-item w3-button w3-red">Red</a>
-                <a href="http://goappnode0.appspot.com/theme" class="w3-bar-item w3-button w3-pink">Pink</a>
-                <a href="http://goappnode0.appspot.com/theme" class="w3-bar-item w3-button w3-purple">Purple</a>
-                <a href="http://goappnode0.appspot.com/theme" class="w3-bar-item w3-button w3-indigo">Indigo</a>
-                <a href="http://goappnode0.appspot.com/theme" class="w3-bar-item w3-button w3-teal">Teal</a>
-                <a href="http://goappnode0.appspot.com/theme" class="w3-bar-item w3-button w3-green">Green</a>
+                    <form action="/theme" method="post" id="formOne" style="margin: 0; padding: 0">
+                    <input class="w3-bar-item w3-button w3-red" style="margin: 0" type="submit" id="startTask" name="color" value="Red">
+                    <input class="w3-bar-item w3-button w3-pink" style="margin: 0" type="submit" id="startTask" name="color" value="Pink">
+                    <input class="w3-bar-item w3-button w3-purple" style="margin: 0" type="submit" id="startTask" name="color" value="Purple">
+                    <input class="w3-bar-item w3-button w3-indigo" style="margin: 0" type="submit" id="startTask" name="color" value="Indigo">
+                    <input class="w3-bar-item w3-button w3-teal" style="margin: 0" type="submit" id="startTask" name="color" value="Teal">
+                    <input class="w3-bar-item w3-button w3-green" style="margin: 0" type="submit" id="startTask" name="color" value="Green">
+                    </form>
                 </div>
+                
             </div>
         </div>
         <div class="w3-container w3-black" style="height: 100%">
