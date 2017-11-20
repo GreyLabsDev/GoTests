@@ -204,7 +204,7 @@ func testEcho(w http.ResponseWriter, r *http.Request) {
 
 ///THEME
 func initTheme() {
-	themeData = {
+	themeData = map[string]map[string]string{
 		"Red" : map[string]string{
 			"code" : "#F44336",
 			"name" : "w3-red"
@@ -245,7 +245,7 @@ func changeTheme(newTheme string){
 	wr, _ := os.Open("start.html")
 	thisTheme = newTheme
 	fmt.Fprintf(wr, s2)
-	defer wr.Close()
+	wr.Close()
 }
 
 func themeServer(w http.ResponseWriter, r *http.Request) {
@@ -259,8 +259,7 @@ func themeServer(w http.ResponseWriter, r *http.Request) {
 
 		r.ParseForm()
 		changeTheme(r.FormValue("color"))
-		}
-	}
+		}	
 }
 ///THEME
 
