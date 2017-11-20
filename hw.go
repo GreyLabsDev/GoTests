@@ -207,27 +207,27 @@ func initTheme() {
 	themeData = map[string]map[string]string{
 		"Red" : map[string]string{
 			"code" : "#F44336",
-			"name" : "w3-red"
+			"name" : "w3-red",
 		},
 		"Pink" : map[string]string{
 			"code" : "#E91E63",
-			"name" : "w3-pink"
+			"name" : "w3-pink",
 		},
 		"Purple" : map[string]string{
 			"code" : "#9C27B0",
-			"name" : "w3-purple"
+			"name" : "w3-purple",
 		},
 		"Indigo" : map[string]string{
 			"code" : "#3F51B5",
-			"name" : "w3-indigo"
+			"name" : "w3-indigo",
 		},
 		"Teal" : map[string]string{
 			"code" : "#009688",
-			"name" : "w3-real"
+			"name" : "w3-real",
 		},
 		"Green" : map[string]string{
 			"code" : "#4CAF50",
-			"name" : "w3-green"
+			"name" : "w3-green",
 		},
 	}
 }
