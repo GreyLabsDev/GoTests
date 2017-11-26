@@ -1,0 +1,89 @@
+<html>
+    <head>
+    <meta charset="utf-8" name="Greyson" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#3F51B5">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <style> 
+        input[type=text] {
+            width: 35%;
+            padding: 10px 10px;
+            box-sizing: border-box;
+            border: 3px solid #3F51B5;
+            outline: none;
+            color: white;
+            background-color: black;
+            -webkit-transition: 0.4s;
+        }
+        input[type=text]:focus {
+            background-color: #3F51B5;
+            border: 3px solid #3F51B5;
+        }
+        input[type=button], input[type=submit], input[type=reset] {
+            background-color: #3F51B5;
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function openNavigation() {
+            document.getElementById("navigationBar").style.display = "block";
+            }
+        function closeNavigation() {
+            document.getElementById("navigationBar").style.display = "none";
+            document.getElementById("openNav").style.display = "inline-block";
+            }
+    </script>
+    
+<body class="w3-black">
+    <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-indigo" style="display:none" id="navigationBar">
+        <button class="w3-bar-item w3-button w3-red" onclick="closeNavigation()">Close &times;</button>
+        <a href="http://goappnode5.herokuapp.com/updinfo" class="w3-bar-item w3-button">Update cluster info</a>
+        <a href="http://goappnode5.herokuapp.com/log" class="w3-bar-item w3-button">Logs</a>
+        <a href="http://goappnode5.herokuapp.com/status" class="w3-bar-item w3-button">Status</a>
+        <a href="http://goappnode5.herokuapp.com/clean" class="w3-bar-item w3-button">Clean logs</a>
+        <a href="http://goappnode5.herokuapp.com/messenger" class="w3-bar-item w3-button">Nodes messenger</a>
+        <a href="http://goappnode5.herokuapp.com/test" class="w3-bar-item w3-button">Start test</a>
+        <a href="http://goappnode5.herokuapp.com/reset" class="w3-bar-item w3-button">RESET STATE</a>
+    </div>
+    <div id="main">
+        <div class="w3-indigo">
+            <div class="w3-container">
+            <h1>Golang test node</h1>
+        </div>
+        <button id="openNav" class="w3-button w3-indigo w3-large" onclick="openNavigation()">&#9776; Navigation</button>
+            <div class="w3-dropdown-hover w3-right">
+                <button class="w3-button w3-large">Theme &#9681; </button>
+                <div class="w3-dropdown-content w3-bar-block w3-indigo w3-animate-opacity" id="themesMenu" style="right:0">
+                <a href="http://goappnode5.herokuapp.com/theme" class="w3-bar-item w3-button w3-red">Red</a>
+                <a href="http://goappnode5.herokuapp.com/theme" class="w3-bar-item w3-button w3-pink">Pink</a>
+                <a href="http://goappnode5.herokuapp.com/theme" class="w3-bar-item w3-button w3-purple">Purple</a>
+                <a href="http://goappnode5.herokuapp.com/theme" class="w3-bar-item w3-button w3-indigo">Indigo</a>
+                <a href="http://goappnode5.herokuapp.com/theme" class="w3-bar-item w3-button w3-teal">Teal</a>
+                <a href="http://goappnode5.herokuapp.com/theme" class="w3-bar-item w3-button w3-green">Green</a>
+                </div>
+            </div>
+        </div>
+        <div class="w3-container w3-black" style="height: 100%">
+            <h3>Hello, test application started.</h3>
+            <p>You can use left navigation bar to go to this pages</p>
+            <p>Set up you task, and start it!</p>
+            <form action="/task" method="post" id="formOne">
+                <p><label for="nodeId">Task word:</label></p>
+                <p><input type="text" id="taskWord" name="taskWord" value=""></p>
+                <p><label for="nodeId">Task body:</label></p>
+                <p><input type="text" id="taskBody" name="taskBody" value=""></p>
+                <p><input class="w3-button w3-indigo" type="submit" id="startTask" name="startTask" value="Start task"><input class="w3-button w3-red" type="reset" id="cleanTask" name="cleanTask" value="Clean task content"></p>
+            </form>
+            <p>GreyLabs. Heroku + Golang + HTML5 (w3.css)</p>
+            <a href="https://github.com/GreyLabsDev/GoTests" class="w3-button w3-indigo" >Source on GitHub</a>
+            <p><a href="https://golang.org/"><img src="http://img.stanleylieber.com/src/18343/img/1471307700.jpg" class="w3-image w3-hover-opacity" alt="Golang" style="width: 70px; height: 70px"></a></p>
+        </div>
+    </div>
+</body>
+</html>

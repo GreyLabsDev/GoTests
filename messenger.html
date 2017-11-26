@@ -1,0 +1,54 @@
+<html>
+    <head>
+    <meta charset="utf-8" name="Greyson" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#3F51B5">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <style> 
+        input[type=text] {
+            width: 30%;
+            padding: 10px 10px;
+            box-sizing: border-box;
+            border: 3px solid #3F51B5;
+            outline: none;
+            color: white;
+            background-color: black;
+            -webkit-transition: 0.4s;
+        }
+
+        input[type=text]:focus {
+            background-color: #3F51B5;
+            border: 3px solid #3F51B5;
+        }
+        input[type=button], input[type=submit], input[type=reset] {
+            background-color: #3F51B5;
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+<body class="w3-black">
+    <div id="main">
+        <div class="w3-indigo">
+            <div class="w3-container">
+            <h1>Golang test node</h1>
+        </div>
+        <a href="http://goappnode5.herokuapp.com/" class="w3-button w3-large">&#8678; Back</a>
+        </div>
+        <div class="w3-container w3-black" style="height: 100%">
+            <p>Send test message to cluster member</p>
+            <form action="/message" method="post" id="formTwo">
+                <p><label for="nodeId">Node ID:</label></p>
+                <p><input type="text" id="nodeIdIn" name="nodeId" value=""></p>
+                <p><label for="echoContent">Request content:</label></p>
+                <p><input type="text" id="echoContentIn" name="echoContent" value=""></p>
+                <p><input class="w3-button w3-indigo" type="submit" id="sendEchoBtn" name="echoBtn" value="Send message"><input class="w3-button w3-red" type="reset" id="resetEchoBtn" name="echoBtn" value="Clean message"></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
